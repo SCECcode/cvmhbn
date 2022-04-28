@@ -1,3 +1,4 @@
 s/%%CVMHBN%/CVMHLABN/g
 s/%%CVMHBN_DAT%/CVMHB-Los-Angeles-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-Los-Angeles-Basin.vo/g
 s/%%cvmhbn%/cvmhlabn/g
