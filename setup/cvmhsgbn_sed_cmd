@@ -1,0 +1,6 @@
+s/%%CVMHBN%/CVMHSGBN/g
+s/%%CVMHBN_DAT%/CVMHB-San-Gabriel-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-San-Gabriel-Basin.vo/g
+s/%%cvmhbn%/cvmhsgbn/g
+s/%%CVMHBN_MODEL%/San Gabriel Basin Velocity Model/g
+

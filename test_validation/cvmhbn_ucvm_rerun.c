@@ -188,8 +188,6 @@ int _compare_double(double f1, double f2) {
 //USE %%cvmhbn%_query to process points with negative depth
 void try_again(dat_data_t *dat, FILE *bfp, FILE *gfp, int* mcount, int* mmcount, int* okcount) {
 
-   fprintf(stderr,"calling try_again..\n");
-
     %%cvmhbn%_point_t pt;
     %%cvmhbn%_properties_t ret;
 
@@ -245,7 +243,6 @@ void try_again(dat_data_t *dat, FILE *bfp, FILE *gfp, int* mcount, int* mmcount,
     }
     // Close the model.
     assert(model_finalize()==0);
-    fprintf(stderr,"try_again: done\n");
 
 }
 
@@ -402,7 +399,6 @@ fprintf(stderr," A GROUP..%ld\n",tcount);
 
   if(idx > 0) {
       /* Query the UCVM */
-fprintf(stderr,"outside query..%d\n",idx);
 
       if (ucvm_query(idx, pnts, props) != UCVM_CODE_SUCCESS) {
         fprintf(stderr, "Query CVM Failed\n");
@@ -412,7 +408,6 @@ fprintf(stderr,"outside query..%d\n",idx);
       // compare result
       // is result matching ?
       for(int j=0; j<idx; j++) {
-fprintf(stderr,"here..j(%d)\n",j);
 
 if(validate_debug && j==0) {
 fprintf(stderr," VV|| pnts  << coord0(%lf) coord1(%lf) coord2(%lf) \n", pnts[j].coord[0], pnts[j].coord[1], pnts[j].coord[2]);
@@ -433,7 +428,6 @@ fprintf(stderr," Vv|| props << vp(%lf) vs(%lf) rho(%lf) \n", props[j].cmb.vp, pr
                     props[j].cmb.vp,props[j].cmb.vs);
              } else {
                try_again(&dat[j],bfp,gfp,&mcount,&mmcount,&okcount);
-fprintf(stderr,"HERE...%d,%d,%d\n",okcount,mmcount,mcount);
             }
           } else {
             okcount++;
