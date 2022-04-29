@@ -44,6 +44,8 @@ typedef struct dat_entry_t
   int ucvm_depth_idx;
   int vp_idx;
   int vs_idx;
+  int vpvp_idx; // don't care
+  int vsvs_idx; // don't care
 } dat_entry_t;
 
 typedef struct dat_data_t 
@@ -70,7 +72,7 @@ FILE *_process_datfile(char *fname) {
   char dat_line[1028];
   FILE *fp = fopen(fname, "r");
   if (fp == NULL) {
-    fprintf(stderr,"RERUN_UCVM: FAIL: Unable to open the validation data file %s\n", fname);
+    fprintf(stderr,"RETRY_UCVM: FAIL: Unable to open the validation data file %s\n", fname);
     exit(1);
   }
 
@@ -79,7 +81,7 @@ FILE *_process_datfile(char *fname) {
 
   /* read the title line */
     if (fgets(dat_line, 1028, fp) == NULL) {
-      fprintf(stderr,"RERUN_UCVM: FAIL: Unable to extract validation data file %s\n", fname);
+      fprintf(stderr,"RETRY_UCVM: FAIL: Unable to extract validation data file %s\n", fname);
       fclose(fp);
       exit(1);
     }
@@ -99,27 +101,31 @@ FILE *_process_datfile(char *fname) {
   
     while(p != NULL)
     {
-      if(validate_debug) { printf("RERUN_UCVM:'%s'\n", p); }
+      if(validate_debug) { printf("RETRY_UCVM:'%s'\n", p); }
       if(strcmp(p,"id")==0)
-  dat_entry.id_idx=counter;
+          dat_entry.id_idx=counter;
       else if(strcmp(p,"lon")==0)
-  dat_entry.lon_idx=counter;
+          dat_entry.lon_idx=counter;
       else if(strcmp(p,"lat")==0)
-  dat_entry.lat_idx=counter;
+          dat_entry.lat_idx=counter;
       else if(strcmp(p,"Y")==0)
-  dat_entry.y_idx=counter;
+          dat_entry.y_idx=counter;
       else if(strcmp(p,"X")==0)
-  dat_entry.x_idx=counter;
+          dat_entry.x_idx=counter;
       else if(strcmp(p,"Z")==0)
-  dat_entry.z_idx=counter;
+          dat_entry.z_idx=counter;
       else if(strcmp(p,"depth")==0)
-  dat_entry.depth_idx=counter;
+          dat_entry.depth_idx=counter;
       else if(strcmp(p,"ucvm_depth")==0)
-  dat_entry.ucvm_depth_idx=counter;
+          dat_entry.ucvm_depth_idx=counter;
       else if(strcmp(p,"vp63_basin")==0)
-  dat_entry.vp_idx=counter;
+          dat_entry.vp_idx=counter;
       else if(strcmp(p,"vs63_basin")==0)
-  dat_entry.vs_idx=counter;
+          dat_entry.vs_idx=counter;
+      else if(strcmp(p,"vp")==0)
+          dat_entry.vpvp_idx=counter;
+      else if(strcmp(p,"vs")==0)
+          dat_entry.vsvs_idx=counter;
       p = strtok(NULL, delimiter);
       counter++;
     }
@@ -381,6 +387,8 @@ fprintf(stderr,"HERE inside...%d,%d,%d\n",okcount,mmcount,mcount);
   fprintf(stderr,"RETRY_UCVM: %d mismatch out of %ld \n", mcount, tcount);
   fprintf(stderr,"RETRY_UCVM: good with matching values(%d) mmcount(%d) \n",okcount, mmcount );
 
+  free(rets);
+  free(pnts);
   fclose(fp);
   fclose(bfp);
   fclose(gfp);

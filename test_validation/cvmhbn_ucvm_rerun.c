@@ -357,7 +357,7 @@ fprintf(stderr," Vv|| props << vp(%lf) vs(%lf) rho(%lf) \n", props[j].cmb.vp, pr
 
         if(_compare_double(props[j].cmb.vs, dat[j].vs) || _compare_double(props[j].cmb.vp, dat[j].vp)) {
 
-           if (!_compare_double(props[j].cmb.vs, 0) && !_compare_double(props[j].cmb.vp, 0) &&
+          if (!_compare_double(props[j].cmb.vs, 0) && !_compare_double(props[j].cmb.vp, 0) &&
                         !_compare_double(dat[j].vs, -99999.0) && !_compare_double(dat[j].vp, -99999.0)) {
              mmcount++;  // just 0 vs -99999
              fprintf(gfp,"%ld,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",
@@ -371,7 +371,9 @@ fprintf(stderr," Vv|| props << vp(%lf) vs(%lf) rho(%lf) \n", props[j].cmb.vp, pr
                         dat[j].lon,dat[j].lat,dat[j].ucvm_depth,
                         dat[j].vp, dat[j].vs, props[j].cmb.vp,props[j].cmb.vs);
 	       mcount++;
-               }
+	       fprintf(bfp,"here..\n");
+	       fprintf(stderr,"XXX\n");
+          }
           } else {
             okcount++;
              fprintf(gfp,"%ld,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",
