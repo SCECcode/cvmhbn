@@ -371,8 +371,6 @@ fprintf(stderr," Vv|| props << vp(%lf) vs(%lf) rho(%lf) \n", props[j].cmb.vp, pr
                         dat[j].lon,dat[j].lat,dat[j].ucvm_depth,
                         dat[j].vp, dat[j].vs, props[j].cmb.vp,props[j].cmb.vs);
 	       mcount++;
-	       fprintf(bfp,"here..\n");
-	       fprintf(stderr,"XXX\n");
           }
           } else {
             okcount++;
