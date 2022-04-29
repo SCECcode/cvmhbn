@@ -239,7 +239,7 @@ int main(int argc, char* const argv[]) {
       break;
     case 'f':
       strcpy(datfile, optarg);
-      breakRETRY;
+      break;
     case 'd':
       validate_debug=1;
       break;
@@ -290,7 +290,7 @@ int main(int argc, char* const argv[]) {
 
         if(idx == NUM_POINTS) {
           /* Query the UCVM */
-          if (model_query(&pnts, &rets, NUM_POINTS) != UCVM_CODE_SUCCESS) {
+          if (model_query(pnts, rets, NUM_POINTS) != UCVM_CODE_SUCCESS) {
             fprintf(stderr, "Query CVM Failed\n");
             return(1);
           }
