@@ -185,68 +185,6 @@ int _compare_double(double f1, double f2) {
 }
 
 /*********************************************/
-//USE %%cvmhbn%_query to process points with negative depth
-void try_again(dat_data_t *dat, FILE *bfp, FILE *gfp, int* mcount, int* mmcount, int* okcount) {
-
-    %%cvmhbn%_point_t pt;
-    %%cvmhbn%_properties_t ret;
-
-    ucvm_ctype_t cmode=UCVM_COORD_GEO_DEPTH;
-
-    char *envstr=getenv("UCVM_INSTALL_PATH");
-    if(envstr != NULL) {
-      assert(model_init(envstr, "%%cvmhbn%")==0);
-      } else {
-        assert(model_init("..", "%%cvmhbn%")==0);
-    }
-      
-    assert(model_setparam(0, UCVM_PARAM_QUERY_MODE, cmode)==0);
-      
-    if(validate_debug) {
-       fprintf(stderr, "try_again: ucvm_depth %lf  depth %lf\n", dat->ucvm_depth, dat->depth);
-    }
-
-// model_query with cvmh depth
-    pt.longitude=dat->lon;
-    pt.latitude=dat->lat;
-    pt.depth=dat->depth;
-
-    int rc=model_query(&pt, &ret, 1);
-
-    if(validate_debug) {
-      fprintf(stderr,"try_again: rc %d\n",rc);
-    }
-
-    if(_compare_double(ret.vs, dat->vs) || _compare_double(ret.vp, dat->vp)) {
-
-      if (!_compare_double(ret.vs, 0) && !_compare_double(ret.vp, 0) &&
-                    !_compare_double(dat->vs, -99999.0) && !_compare_double(dat->vp, -99999.0)) {
-        (*mmcount)++;  // just 0 vs -99999
-        fprintf(gfp,"%ld,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",
-                dat->id,dat->x,dat->y,dat->z, dat->depth,
-                dat->lon,dat->lat,dat->ucvm_depth,
-                dat->vp,dat->vs,ret.vp,ret.vs);
-        } else {
-          fprintf(bfp,"%ld,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",
-                    dat->id, dat->y,dat->x,dat->z,dat->depth,
-                    dat->lon,dat->lat,dat->ucvm_depth,
-                    dat->vp,dat->vs,ret.vp,ret.vs);
-          (*mcount)++;
-      }
-      } else {
-        (*okcount)++;
-        fprintf(gfp,"%ld,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",
-                dat->id,dat->x,dat->y,dat->z, dat->depth,
-                dat->lon,dat->lat,dat->ucvm_depth,
-                dat->vp,dat->vs,ret.vp,ret.vs);
-
-    }
-    // Close the model.
-    assert(model_finalize()==0);
-
-}
-
-/*********************************************/
 
 /* Usage function */
 void usage() {
