@@ -381,7 +381,6 @@ fprintf(stderr,"HERE inside...%d,%d,%d\n",okcount,mmcount,mcount);
     
 
   assert(model_finalize() == 0);
-  ucvm_finalize();
   printf("RETRY_UCVM:Model closed successfully.\n");
 
   fprintf(stderr,"RETRY_UCVM: %d mismatch out of %ld \n", mcount, tcount);
