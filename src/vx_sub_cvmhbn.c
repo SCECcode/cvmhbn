@@ -650,13 +650,18 @@ if(check_surface || no_interp) {
 	memcpy(&(entry->vp), &hrbuffer[j], p_vp63_basin.ESIZE);
 	memcpy(&(entry->vs), &hrvsbuffer[j], p_vp63_basin.ESIZE);
 
+if(_debug) {
 if(check_surface)
-  fprintf(stderr,"XXX(surface) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+  fprintf(stderr,"(surface) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
   else
-    fprintf(stderr,"XXX(no_interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+    fprintf(stderr,"(no_interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+}
+
 } else {
   vx_interp_model(gcoor, gcoor_f, hrbuffer, hrvsbuffer, p_vp63_basin.ESIZE, &(entry->vp), &(entry->vs));
-  fprintf(stderr,"XXX(interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+if(_debug) {
+  fprintf(stderr,"(interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+}
 }
 
         if(entry->vs == -99999.0 &&  entry->vp == -99999.0) {
@@ -1185,7 +1190,7 @@ int esize, float *vp, float *vs) {
   int j=voxbytepos(gcoor,hr_a.N,esize);
   memcpy(vp, &vpbuffer[j], esize);
   memcpy(vs, &vsbuffer[j], esize);
-fprintf(stderr,"XXX in vx_read_properties j(%d) vp(%lf) vs(%lf)\n", j, *vp, *vs);
+if(_debug) { fprintf(stderr,"in vx_read_properties j(%d) vp(%lf) vs(%lf)\n", j, *vp, *vs); }
 }
 
 /* Interpolate point linearly between two 1d values */
