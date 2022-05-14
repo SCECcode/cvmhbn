@@ -10,7 +10,7 @@
 
 ## Description
 
-CVMH Basin is the templated base code for generate basin model access code for different basins.   
+CVMH Basin is the templated base code for generate basin model access code for various CVMH basins.   
 
 ## Table of Contents
 1. [Software Documentation](https://github.com/SCECcode/cvmhbn/wiki)

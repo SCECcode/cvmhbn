@@ -122,4 +122,21 @@ void vx_dist_point_to_voxel(vx_entry_t *entry,
 			    vx_voxel_t *voxel, 
 			    float *dist_2d, float *dist_3d);
 
+void vx_read_properties(int gx,int gy,int gz, char *vpbuffer, 
+               char *vsbuffer, int esize, float *vp, float *vs);
+void vx_interp_model(int *gcoor, float *gcoor_f, char *vpbuffer,
+                char *vsbuffer, int esize, float *vp, float *vs);
+/* Interpolate point linearly between two 1d values */
+float vx_interp_linear(float v1, float v2, float ratio); 
+
+/* Interpolate point bilinearly between four corners */
+float vx_interp_bilinear(float x, float y, 
+                 float x1, float y1, float x2, float y2, 
+                 float q11, float q21, float q12, float q22);
+
+/* Interpolate point tri-linearly between 8 cube corners.
+   Points are indexed [ll,ur][x,y,z], q is indexed[z][y][x] */
+float vx_interp_trilinear(float x, float y, float z,
+                             float p[2][3], float q[2][2][2]);
+
 #endif

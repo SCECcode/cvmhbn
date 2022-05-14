@@ -39,6 +39,9 @@ float p0_NO_DATA_VALUE = -99999.0; // p0.NO_DATA_VALUE
 //float p0_NO_DATA_VALUE = 0.0; // p0.NO_DATA_VALUE 
 int p0_ESIZE = 4; // p0.ESIZE
 
+int no_interp=0;
+int check_surface=0; // this is when query for surface
+
 /* Function declarations */
 void gctp();
 int voxbytepos(int *, int* ,int);
@@ -416,6 +419,7 @@ if(_debug) fprintf(stderr,"CALLING --- vx_getcoord_private (enhanced %d)\n",enha
   int j=0;
   double SP[2],SPUTM[2];
   int gcoor[3];
+  float gcoor_f[3];
   // fall into bkg
   int do_bkg = False;
   float surface=0.0;
@@ -427,9 +431,14 @@ if(_debug) fprintf(stderr,"CALLING --- vx_getcoord_private (enhanced %d)\n",enha
   depth = 0.0;
   zt = 0.0;
   topo_gap = 0.0;
+
   gcoor[0]=0;
   gcoor[1]=0;
   gcoor[2]=0;
+
+  gcoor_f[0]=0.0;
+  gcoor_f[1]=0.0;
+  gcoor_f[2]=0.0;
 
 
   /* Proceed only if setup has been performed */
@@ -613,9 +622,13 @@ if(_debug) fprintf(stderr," === POST >>> depth %lf surface %lf utm2 %lf coor %lf
 	 data point */
 
       /* Extract vp/vs */      
-      gcoor[0]=round((entry->coor_utm[0]-hr_a.O[0])/step_hr[0]);
-      gcoor[1]=round((entry->coor_utm[1]-hr_a.O[1])/step_hr[1]);
-      gcoor[2]=round((entry->coor_utm[2]-hr_a.O[2])/step_hr[2]);
+      gcoor_f[0]=(entry->coor_utm[0]-hr_a.O[0])/step_hr[0];
+      gcoor_f[1]=(entry->coor_utm[1]-hr_a.O[1])/step_hr[1];
+      gcoor_f[2]=(entry->coor_utm[2]-hr_a.O[2])/step_hr[2];
+
+      gcoor[0]=round(gcoor_f[0]);
+      gcoor[1]=round(gcoor_f[1]);
+      gcoor[2]=round(gcoor_f[2]);
       
 if(_debug) { fprintf(stderr,"  >Look in HR area..gcoor(%d %d %d) with utm(%f %f %f)\n", 
                               gcoor[0],gcoor[1],gcoor[2], entry->coor_utm[0],
@@ -627,11 +640,24 @@ if(_debug) { fprintf(stderr,"  >Look in HR area..gcoor(%d %d %d) with utm(%f %f 
 	entry->vel_cell[0]= hr_a.O[0]+gcoor[0]*step_hr[0];
 	entry->vel_cell[1]= hr_a.O[1]+gcoor[1]*step_hr[1];
 	entry->vel_cell[2]= hr_a.O[2]+gcoor[2]*step_hr[2];
+
 if(_debug) { fprintf(stderr,"  >with entry_vel_cell cell center, %f %f %f\n", entry->vel_cell[0], entry->vel_cell[1], entry->vel_cell[2]); }
+
 	j=voxbytepos(gcoor,hr_a.N,p_vp63_basin.ESIZE);
 	memcpy(&(entry->provenance), &hrtbuffer[j], p0_ESIZE);
+
+if(check_surface || no_interp) { 
 	memcpy(&(entry->vp), &hrbuffer[j], p_vp63_basin.ESIZE);
 	memcpy(&(entry->vs), &hrvsbuffer[j], p_vp63_basin.ESIZE);
+
+if(check_surface)
+  fprintf(stderr,"XXX(surface) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+  else
+    fprintf(stderr,"XXX(no_interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+} else {
+  vx_interp_model(gcoor, gcoor_f, hrbuffer, hrvsbuffer, p2.ESIZE, &(entry->vp), &(entry->vs));
+  fprintf(stderr,"XXX(interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
+}
 
         if(entry->vs == -99999.0 &&  entry->vp == -99999.0) {
 if(%%cvmhbn%_debug) { fprintf(stderr,"  >FOUND IN HR but NODATA>>>>>> j(%d) gcoor(%d %d %d) vp(%f) vs(%f)\n",j, gcoor[0], gcoor[1], gcoor[2], entry->vp, entry->vs); }
@@ -728,7 +754,9 @@ void vx_getvoxel(vx_voxel_t *voxel) {
 /* Query elevation of free surface at point 'coor' */
 void vx_getsurface(double *coor, vx_coord_t coor_type, float *surface)
 {
+  check_surface=1;
   vx_getsurface_private(coor, coor_type, surface);
+  check_surface=0;
   return;
 }
 
@@ -1146,4 +1174,96 @@ void vx_init_voxel(vx_voxel_t *voxel) {
   voxel->vp = voxel->vs = voxel->rho = p0_NO_DATA_VALUE;
 
   return;
+}
+
+void vx_read_properties(int gx,int gy,int gz, char *vpbuffer, char *vsbuffer, 
+int esize, float *vp, float *vs) {
+  int gcoor[3];
+  gcoor[0]=gx;
+  gcoor[1]=gy;
+  gcoor[2]=gz;
+  int j=voxbytepos(gcoor,hr_a.N,esize);
+  memcpy(vp, &vpbuffer[j], esize);
+  memcpy(vs, &vsbuffer[j], esize);
+fprintf(stderr,"XXX in vx_read_properties j(%d) vp(%lf) vs(%lf)\n", j, *vp, *vs);
+}
+
+/* Interpolate point linearly between two 1d values */
+float vx_interp_linear(float v1, float v2, float ratio) 
+{
+  return(ratio*v2 + v1*(1-ratio));
+}
+
+
+/* Interpolate point bilinearly between four corners */
+float vx_interp_bilinear(float x, float y, 
+                 float x1, float y1, float x2, float y2, 
+                 float q11, float q21, float q12, float q22)
+{
+  float p = (x2 - x1) * (y2 - y1);
+  float f1 = (q11 / p) * (x2 - x) * (y2 - y);
+  float f2 = (q21 / p) * (x - x1) * (y2 - y);
+  float f3 = (q12 / p) * (x2 - x) * (y - y1);
+  float f4 = (q22 / p) * (x - x1) * (y - y1);
+  return f1 + f2 + f3 + f4;
+}
+
+/* Interpolate point tri-linearly between 8 cube corners.
+   Points are indexed [ll,ur][x,y,z], q is indexed[z][y][x] */
+float vx_interp_trilinear(float x, float y, float z,
+                             float p[2][3], float q[2][2][2])
+{
+  float c0, c1;
+  float ratio;
+
+  /* Top plane */
+  c0 = vx_interp_bilinear(x, y,
+                      p[0][0], p[0][1],
+                      p[1][0], p[1][1],
+                      q[0][0][0], q[0][0][1],
+                      q[0][1][0], q[0][1][1]);
+
+  /* Bottom plane */
+  c1 = vx_interp_bilinear(x, y,
+                      p[0][0], p[0][1],
+                      p[1][0], p[1][1],
+                      q[1][0][0], q[1][0][1],
+                      q[1][1][0], q[1][1][1]);
+
+  /* Z axis */
+  ratio = (z - p[0][2])/(p[1][2] - p[0][2]);
+//  fprintf(stderr,"c0 %lf, c1 %lf, ratio %lf\n", c0, c1, ratio);
+  return (vx_interp_linear(c0, c1, ratio));
+}
+
+void vx_interp_model(int *gcoor, float *gcoor_f, char *vpbuffer, char *vsbuffer, int esize, float *vp, float *vs) {
+
+  float cvmh_p[2][3];
+  float cvmh_q_vp[2][2][2];
+  float cvmh_q_vs[2][2][2];
+
+  cvmh_p[0][0] = 0.0;
+  cvmh_p[0][1] = 0.0;
+  cvmh_p[0][2] = 0.0;
+  cvmh_p[1][0] = 1.0;
+  cvmh_p[1][1] = 1.0;
+  cvmh_p[1][2] = 1.0;
+
+  for(int z=0; z<2; z++) {
+    for(int y=0; y<2; y++) {
+      for(int x=0; x<2; x++) {
+        vx_read_properties(gcoor[0]+x,gcoor[1]+y,gcoor[2]+z, vpbuffer, vsbuffer,
+                                    esize, &(cvmh_q_vp[x][y][z]), &(cvmh_q_vs[x][y][z]));
+      }
+    }
+  }
+
+  /* Perform trilinear interpolation */
+  gcoor_f[0] = gcoor_f[0] - (int)(gcoor_f[0]);
+  gcoor_f[1] = gcoor_f[1] - (int)(gcoor_f[1]);
+  gcoor_f[2] = gcoor_f[2] - (int)(gcoor_f[2]);
+
+// XX
+  *vs = vx_interp_trilinear(gcoor_f[0], gcoor_f[1], gcoor_f[2], cvmh_p, cvmh_q_vs);
+  *vp = vx_interp_trilinear(gcoor_f[0], gcoor_f[1], gcoor_f[2], cvmh_p, cvmh_q_vp);
 }
