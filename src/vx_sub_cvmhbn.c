@@ -655,7 +655,7 @@ if(check_surface)
   else
     fprintf(stderr,"XXX(no_interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
 } else {
-  vx_interp_model(gcoor, gcoor_f, hrbuffer, hrvsbuffer, p2.ESIZE, &(entry->vp), &(entry->vs));
+  vx_interp_model(gcoor, gcoor_f, hrbuffer, hrvsbuffer, p_vp63_basin.ESIZE, &(entry->vp), &(entry->vs));
   fprintf(stderr,"XXX(interp) HR.. vp(%lf)  vs(%lf)\n", entry->vp, entry->vs);
 }
 
