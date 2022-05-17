@@ -14,6 +14,7 @@
 #include <assert.h>
 #include <unistd.h>
 #include <getopt.h>
+#include <strings.h>
 #include "ucvm_model_dtypes.h"
 #include "%%cvmhbn%.h"
 

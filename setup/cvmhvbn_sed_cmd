@@ -2,3 +2,4 @@ s/%%CVMHBN%/CVMHVBN/g
 s/%%CVMHBN_DAT%/CVMHB-Ventura-Basin.dat/g
 s/%%CVMHBN_VO%/CVMHB-Ventura-Basin.vo/g
 s/%%cvmhbn%/cvmhvbn/g
+s/%%CVMHBN_MODEL%/CVMH Ventura Basin Velocity Model/g

@@ -39,7 +39,7 @@ float p0_NO_DATA_VALUE = -99999.0; // p0.NO_DATA_VALUE
 //float p0_NO_DATA_VALUE = 0.0; // p0.NO_DATA_VALUE 
 int p0_ESIZE = 4; // p0.ESIZE
 
-int no_interp=0;
+int no_interp=1;
 int check_surface=0; // this is when query for surface
 
 /* Function declarations */
