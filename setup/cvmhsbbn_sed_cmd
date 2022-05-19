@@ -1,0 +1,5 @@
+s/%%CVMHBN%/CVMHSBBN/g
+s/%%CVMHBN_DAT%/CVMHB-San-Bernardino-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-San-Bernardino-Basin.vo/g
+s/%%cvmhbn%/cvmhsbbn/g
+s/%%CVMHBN_MODEL%/CVMH San Bernardino Velocity Model/g

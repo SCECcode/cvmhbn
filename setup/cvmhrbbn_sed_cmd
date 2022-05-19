@@ -1,0 +1,5 @@
+s/%%CVMHBN%/CVMHRBBN/g
+s/%%CVMHBN_DAT%/CVMHB-Ridge-Basin-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-Ridge-Basin-Basin.vo/g
+s/%%cvmhbn%/cvmhrbbn/g
+s/%%CVMHBN_MODEL%/CVMH Ridge Basin Velocity Model/g

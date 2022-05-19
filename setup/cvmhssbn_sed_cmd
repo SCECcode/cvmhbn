@@ -1,0 +1,5 @@
+s/%%CVMHBN%/CVMHSSBN/g
+s/%%CVMHBN_DAT%/CVMHB-Salton-Sea-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-Salton-Sea-Basin.vo/g
+s/%%cvmhbn%/cvmhssbn/g
+s/%%CVMHBN_MODEL%/CVMH Salton Sea Velocity Model/g
