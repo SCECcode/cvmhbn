@@ -38,6 +38,14 @@ As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use basin labe
 1. cvmhlabn
 2. cvmhsgbn
 3. cvmhvbn
+4. cvmhibbn
+5. cvmhrbbn
+6. cvmhssbn
+7. cvmhsbbn
+8. cvmhsgcbn
+9. cvmhsmbn
+
+
 
 ## Support
 Support for CVMHBN is provided by the Southern California Earthquake Center
