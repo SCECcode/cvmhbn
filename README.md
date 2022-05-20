@@ -35,15 +35,15 @@ To push updated base code from basin model,
 
 As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use basin label as the model.
 
-1. cvmhlabn
-2. cvmhsgbn
-3. cvmhvbn
-4. cvmhibbn
-5. cvmhrbbn
-6. cvmhssbn
-7. cvmhsbbn
-8. cvmhsgcbn
-9. cvmhsmbn
+1. cvmhlabn (Los Angeles)
+2. cvmhsgbn (San Gabriel)
+3. cvmhvbn  (Ventura)
+4. cvmhibbn (Inner Borderland)
+5. cvmhrbn  (Ridge Basin)
+6. cvmhssbn (Salton Sea)
+7. cvmhsbbn (San Bernadino)
+8. cvmhsbcbn (Santa Barbara Channel)
+9. cvmhsmbn (Santa Maria)
 
 
 
