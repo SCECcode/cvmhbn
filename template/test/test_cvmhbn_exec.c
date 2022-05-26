@@ -184,10 +184,8 @@ int test_query_points_by_elevation()
 
 // ge part
   sprintf(infile, "%s/%s", currentdir, "./inputs/test_latlons_ucvm_ge.txt");
-  sprintf(outfile, "%s/%s", currentdir,
-          "test_latlons_ucvm_ge.out");
-  sprintf(reffile, "%s/%s", currentdir,
-          "./ref/test_latlons_ucvm_ge.ref");
+  sprintf(outfile, "%s/%s", currentdir, "test_latlons_ucvm_ge.out");
+  sprintf(reffile, "%s/%s", currentdir, "./ref/test_latlons_ucvm_ge.ref");
 
   if (test_assert_file_exist(infile) != 0) {
     printf("file:%s not found\n",infile);
@@ -272,8 +270,7 @@ int test_query_points_by_depth()
   getcwd(currentdir, 1000);
 
   sprintf(infile, "%s/%s", currentdir, "./inputs/test-depth-ucvm.in");
-  sprintf(outfile, "%s/%s", currentdir,
-          "test-depth-ucvm.out");
+  sprintf(outfile, "%s/%s", currentdir, "test-depth-ucvm.out");
   /*** seems to differ in result from mac and linux ***/
 #ifdef __APPLE__
   sprintf(reffile, "%s/%s", currentdir, "./ref/test-depth-ucvm_mac.ref");
