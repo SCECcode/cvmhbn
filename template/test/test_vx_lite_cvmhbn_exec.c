@@ -32,11 +32,9 @@ int test_vx_lite_%%cvmhbn%_points_elevation()
   /* Save current directory */
   getcwd(currentdir, 1000);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-vx-lite-%%cvmhbn%-elev.in");
-  sprintf(outfile, "%s/%s", currentdir, 
-	  "test-vx-lite-%%cvmhbn%-elev.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-vx-lite-%%cvmhbn%-elev.ref");
+  sprintf(infile, "%s/%s", currentdir, "./inputs/test-elev.in");
+  sprintf(outfile, "%s/%s", currentdir, "test-vx-lite-%%cvmhbn%-elev.out");
+  sprintf(reffile, "%s/%s", currentdir, "./ref/test-vx-lite-%%cvmhbn%-elev.ref");
 
   if (test_assert_int(runVXLite%%CVMHBN%(BIN_DIR, MODEL_DIR, infile, outfile, 
 				MODE_ELEVATION), 0) != 0) {
@@ -69,11 +67,9 @@ int test_vx_lite_%%cvmhbn%_points_depth()
   /* Save current directory */
   getcwd(currentdir, 1000);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-vx-lite-%%cvmhbn%-depth.in");
-  sprintf(outfile, "%s/%s", currentdir, 
-	  "test-vx-lite-%%cvmhbn%-depth.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-vx-lite-%%cvmhbn%-depth.ref");
+  sprintf(infile, "%s/%s", currentdir, "./inputs/test-depth.in");
+  sprintf(outfile, "%s/%s", currentdir, "test-vx-lite-%%cvmhbn%-depth.out");
+  sprintf(reffile, "%s/%s", currentdir, "./ref/test-vx-lite-%%cvmhbn%-depth.ref");
 
   if (test_assert_int(runVXLite%%CVMHBN%(BIN_DIR, MODEL_DIR, infile, outfile, 
 				MODE_DEPTH), 0) != 0) {

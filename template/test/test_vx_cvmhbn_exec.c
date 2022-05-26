@@ -32,7 +32,7 @@ int test_vx_%%cvmhbn%_points_elevation()
   /* Save current directory */
   getcwd(currentdir, 1000);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-vx-%%cvmhbn%-elev.in");
+  sprintf(infile, "%s/%s", currentdir, "./inputs/test-elev.in");
   sprintf(outfile, "%s/%s", currentdir, "test-vx-%%cvmhbn%-elev.out");
   sprintf(reffile, "%s/%s", currentdir, "./ref/test-vx-%%cvmhbn%-elev.ref");
 
@@ -67,7 +67,7 @@ int test_vx_%%cvmhbn%_points_depth()
   /* Save current directory */
   getcwd(currentdir, 1000);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-vx-%%cvmhbn%-depth.in");
+  sprintf(infile, "%s/%s", currentdir, "./inputs/test-depth.in");
   sprintf(outfile, "%s/%s", currentdir, "test-vx-%%cvmhbn%-depth.out");
   sprintf(reffile, "%s/%s", currentdir, "./ref/test-vx-%%cvmhbn%-depth.ref");
 
