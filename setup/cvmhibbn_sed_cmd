@@ -1,5 +1,0 @@
-s/%%CVMHBN%/CVMHIBBN/g
-s/%%CVMHBN_DAT%/CVMHB-Inner-Borderland-Basin.dat/g
-s/%%CVMHBN_VO%/CVMHB-Inner-Borderland-Basin.vo/g
-s/%%cvmhbn%/cvmhibbn/g
-s/%%CVMHBN_MODEL%/CVMH Inner Borderland Velocity Model/g
