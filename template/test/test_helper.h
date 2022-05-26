@@ -18,22 +18,30 @@ typedef enum { VX_TEST_DATASET_NOBKG = 0,
 	       VX_TEST_DATASET_BKG, 
 	       VX_TEST_DATASET_NOGTL } vx_test_dataset_t;
 
+typedef struct %%cvmhbn%%_surf_t {
+        /** Longitude member of the point */
+        double longitude;
+        /** Latitude member of the point */
+        double latitude;
+        /** Depth member of the point */
+        double surf;
+} %%cvmhbn_surf_t;
+
 int test_assert_file_exist(const char* filename);
+
+double init_preset_ucvm_surface(%%cvmhbn%%_surf_t *surfs);
 double get_preset_ucvm_surface(double, double);
 
 /* Retrieve basic test points */
-int get_test_points(double *x, double *y, double *z, 
-                    vx_coord_t *coord_types);
+int get_depth_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect);
+int get_elev_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect,
+                        double *pt_elevation, double *pt_surf);
 
 /* Retrieve expected surface elev at the test points */
 int get_surf_values(double *surf_values);
 
 /* Retrieve expected mat props at the test points */
 int get_mat_props(float *vp, float *vs, double *rho, vx_test_dataset_t ds);
-
-/* Save test points to file */
-int save_depth_test_points(const char* filename);
-int save_elevation_test_points(const char* filename);
 
 /* run with model api */
 int run%%CVMHBN%(const char *bindir, const char *cvmdir, 

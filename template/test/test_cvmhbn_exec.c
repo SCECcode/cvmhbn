@@ -72,6 +72,7 @@ int test_query_by_depth()
   printf("Test: model_query() by depth\n");
 
   %%cvmhbn%_point_t pt;
+  %%cvmhbn%_properties_t expect;
   %%cvmhbn%_properties_t ret;
 
 // Initialize the model, try to use Use UCVM_INSTALL_PATH
@@ -89,11 +90,13 @@ int test_query_by_depth()
       return(1);
   }
 
-  // Query a point.
-  pt.longitude = -118.1;
-  pt.latitude = 34.0;
-  pt.depth = 1500;
+  if( get_depth_test_points(&pt,&expect) ! = 0) {;
+      return(1);
+  }
 
+  printf(stderr,"depth test points (%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt.depth);
+  printf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
+ 
   if (test_assert_int(model_query(&pt, &ret, 1), 0) != 0) {
       return(1);
   }
@@ -101,9 +104,9 @@ int test_query_by_depth()
   // Close the model.
   assert(model_finalize() == 0);
 
-  if ( test_assert_double(ret.vs, 1569.190063) ||
-       test_assert_double(ret.vp, 3180.260498) ||
-       test_assert_double(ret.rho, 2261.115808) ) {
+  if ( test_assert_double(ret.vs, expect.vs) ||
+       test_assert_double(ret.vp, expect.vp) ||
+       test_assert_double(ret.rho, expect.rho) ) {
      printf("FAIL\n");
      return(1);
      } else {
@@ -119,6 +122,7 @@ int test_query_by_elevation()
 
   %%cvmhbn%_point_t pt;
   %%cvmhbn%_properties_t ret;
+  %%cvmhbn%_properties_t expect;
 
 // Initialize the model, try to use Use UCVM_INSTALL_PATH
   char *envstr=getenv("UCVM_INSTALL_PATH");
@@ -132,16 +136,19 @@ int test_query_by_elevation()
 
   int zmode = UCVM_COORD_GEO_ELEV;
   if (test_assert_int(model_setparam(0, UCVM_PARAM_QUERY_MODE, zmode), 0) != 0) {
+    return(1);
+  }
+
+  double pt_elevation;
+  double pt_surf;
+  if( get_elev_test_point(&pt, &expect, &pt_elevation, &pt_surf) != 0 ) {
       return(1);
   }
 
-  // Query a point.
-  pt.longitude = -118.1;
-  pt.latitude = 34.0;
-  double pt_elevation = -1450.1;
-  double pt_surf = 49.9;
-  pt.depth = pt_surf - pt_elevation; // elevation
+  printf(stderr,"elev test points (%lf,%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt_elevation,pt_surf);
+  printf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
 
+  pt.depth = pt_surf - pt_elevation; // elevation
 
   if (test_assert_int(model_query(&pt, &ret, 1), 0) != 0) {
       return(1);
@@ -150,11 +157,9 @@ int test_query_by_elevation()
   // Close the model.
   assert(model_finalize() == 0);
 
-//fprintf(stderr, "%lf %lf %lf\n", ret.vs, ret.vp, ret.rho);
-
-  if ( test_assert_double(ret.vs, 1569.190063) ||
-       test_assert_double(ret.vp, 3180.260498) ||
-       test_assert_double(ret.rho, 2261.115808) ) {
+  if ( test_assert_double(ret.vs, expect.vs) ||
+       test_assert_double(ret.vp, expect.vp) ||
+       test_assert_double(ret.rho, expect.rho) ) {
      printf("FAIL\n");
      return(1);
      } else {
@@ -221,6 +226,8 @@ int test_query_points_by_elevation()
 /* process one term at a time */
 /* currently one for now, (-118.1,34.0) */
   char line[1001];
+  init_preset_ucvm_surface(&test_surfs);
+
   while(fgets(line, 1000, infp) != NULL) {
     if(line[0] == '#') continue; // a comment
     if (sscanf(line,"%lf %lf %lf",
