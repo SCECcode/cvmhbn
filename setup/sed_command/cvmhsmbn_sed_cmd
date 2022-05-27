@@ -2,4 +2,5 @@ s/%%CVMHBN%/CVMHSMBN/g
 s/%%CVMHBN_DAT%/CVMHB-Santa-Maria-Basin.dat/g
 s/%%CVMHBN_VO%/CVMHB-Santa-Maria-Basin.vo/g
 s/%%cvmhbn%/cvmhsmbn/g
-s/%%CVMHBN_MODEL%/CVMH Santa Maria Velocity Model/g
+s/%%CVMHBN_MODEL%/CVMH15-1 Santa Maria Velocity Model/g
+s/%%CVMHBN_DATA_LABEL%/CVMHB-Santa-Maria-Basin/g

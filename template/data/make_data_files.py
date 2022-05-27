@@ -39,6 +39,7 @@ def main():
 
     # Set our variable defaults.
     path = ""
+    bpath = ""
 
     try:
         fp = open('./config','r')
@@ -59,9 +60,11 @@ def main():
 
         if (variable == 'model_data_path') :
             path = val + '/' + model
+            bpath = val + '/' + 'CVMHBN'
             continue
         if (variable == 'model_dir') :
             mdir = "./"+val
+            bdir = "./"+"cvmhbn"
             continue
         continue
     if path == "" :
@@ -74,7 +77,15 @@ def main():
 
     subprocess.check_call(["mkdir", "-p", "./"+mdir])
 
-    flist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@', '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
+    blist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@' ]
+
+    for b in blist :
+        fname = bdir + "/" + b
+        url = bpath + "/" + fname
+        print(url, fname)
+        download_urlfile(url,fname)
+    
+    flist= [ '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
 
     for f in flist :
         fname = mdir + "/" +f

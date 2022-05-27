@@ -2,6 +2,5 @@ s/%%CVMHBN%/CVMHLABN/g
 s/%%CVMHBN_DAT%/CVMHB-Los-Angeles-Basin.dat/g
 s/%%CVMHBN_VO%/CVMHB-Los-Angeles-Basin.vo/g
 s/%%cvmhbn%/cvmhlabn/g
-s/%%CVMHBN_MODEL%/CVMH Los Angeles Basin Velocity Model/g
+s/%%CVMHBN_MODEL%/CVMH15-1 Los Angeles Basin Velocity Model/g
 s/%%CVMHBN_DATA_LABEL%/CVMHB-Los-Angeles-Basin/g
-

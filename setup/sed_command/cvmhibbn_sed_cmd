@@ -3,4 +3,4 @@ s/%%CVMHBN_DAT%/CVMHB-Inner-Borderland-Basin.dat/g
 s/%%CVMHBN_VO%/CVMHB-Inner-Borderland-Basin.vo/g
 s/%%cvmhbn%/cvmhibbn/g
 s/%%CVMHBN_MODEL%/CVMH15-1 Inner Borderland Velocity Model/g
-s/%%CVMHBN_DATA_LABEL%/CVMHB-Ventura-Basin/g
+s/%%CVMHBN_DATA_LABEL%/CVMHB-Inner-Borderland-Basin/g
