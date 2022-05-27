@@ -74,7 +74,7 @@ def main():
 
     subprocess.check_call(["mkdir", "-p", "./"+mdir])
 
-    flist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'MOHO.gts', 'topo_dem@@', '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
+    flist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@', '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
 
     for f in flist :
         fname = mdir + "/" +f
