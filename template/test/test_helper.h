@@ -28,7 +28,7 @@ typedef struct %%cvmhbn%_surf_t {
 } %%cvmhbn%_surf_t;
 
 extern %%cvmhbn%_surf_t test_surfs[100];
-extern int test_surfs_cnt=0;
+extern int test_surfs_cnt;
 
 int test_assert_file_exist(const char* filename);
 

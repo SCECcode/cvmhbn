@@ -18,9 +18,6 @@
 #include "test_%%cvmhbn%_exec.h"
 #include "ucvm_model_dtypes.h"
 
-%%cvmhbn%_surf_t test_surfs[100];
-int test_surfs_cnt=0;
-
 int test_setup()
 {
   printf("Test: model_init() and model_finalize()\n");
@@ -92,7 +89,7 @@ int test_query_by_depth()
       return(1);
   }
 
-  if( (get_depth_test_point(&pt,&expect)) ! = 0) {
+  if( get_depth_test_point(&pt,&expect) != 0) {
       return(1);
   }
 
