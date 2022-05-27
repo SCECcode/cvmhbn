@@ -109,6 +109,7 @@ int main(int argc, char* const argv[]) {
 
         char line[2001];
         while (fgets(line, 2000, stdin) != NULL) {
+           if(strlen(line)==1) continue; // comment line
            if(line[0]=='#') continue; // comment line
            if(line[0]=='d') break;
            if (sscanf(line,"%lf %lf %lf",

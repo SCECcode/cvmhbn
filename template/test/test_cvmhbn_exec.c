@@ -18,6 +18,8 @@
 #include "test_%%cvmhbn%_exec.h"
 #include "ucvm_model_dtypes.h"
 
+%%cvmhbn%_surf_t test_surfs[100];
+int test_surfs_cnt=0;
 
 int test_setup()
 {
@@ -90,12 +92,12 @@ int test_query_by_depth()
       return(1);
   }
 
-  if( get_depth_test_points(&pt,&expect) ! = 0) {;
+  if( (get_depth_test_point(&pt,&expect)) ! = 0) {
       return(1);
   }
 
-  printf(stderr,"depth test points (%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt.depth);
-  printf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
+  //fprintf(stderr,"depth test points (%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt.depth);
+  //fprintf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
  
   if (test_assert_int(model_query(&pt, &ret, 1), 0) != 0) {
       return(1);
@@ -145,8 +147,8 @@ int test_query_by_elevation()
       return(1);
   }
 
-  printf(stderr,"elev test points (%lf,%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt_elevation,pt_surf);
-  printf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
+ // fprintf(stderr,"elev test points (%lf,%lf,%lf,%lf)\n",pt.longitude,pt.latitude,pt_elevation,pt_surf);
+ // fprintf(stderr,"depth result expected (%lf,%lf,%lf)\n",expect.vp,expect.vs,expect.rho);
 
   pt.depth = pt_surf - pt_elevation; // elevation
 
@@ -226,7 +228,8 @@ int test_query_points_by_elevation()
 /* process one term at a time */
 /* currently one for now, (-118.1,34.0) */
   char line[1001];
-  init_preset_ucvm_surface(&test_surfs);
+
+  init_preset_ucvm_surface(test_surfs);
 
   while(fgets(line, 1000, infp) != NULL) {
     if(line[0] == '#') continue; // a comment

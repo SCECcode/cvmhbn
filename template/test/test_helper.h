@@ -18,18 +18,21 @@ typedef enum { VX_TEST_DATASET_NOBKG = 0,
 	       VX_TEST_DATASET_BKG, 
 	       VX_TEST_DATASET_NOGTL } vx_test_dataset_t;
 
-typedef struct %%cvmhbn%%_surf_t {
+typedef struct %%cvmhbn%_surf_t {
         /** Longitude member of the point */
         double longitude;
         /** Latitude member of the point */
         double latitude;
         /** Depth member of the point */
         double surf;
-} %%cvmhbn_surf_t;
+} %%cvmhbn%_surf_t;
+
+extern %%cvmhbn%_surf_t test_surfs[100];
+extern int test_surfs_cnt=0;
 
 int test_assert_file_exist(const char* filename);
 
-double init_preset_ucvm_surface(%%cvmhbn%%_surf_t *surfs);
+double init_preset_ucvm_surface(%%cvmhbn%_surf_t *surfs);
 double get_preset_ucvm_surface(double, double);
 
 /* Retrieve basic test points */

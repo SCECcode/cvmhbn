@@ -92,6 +92,7 @@ int main (int argc, char *argv[])
   /* now let's start with searching .... */
   char line[2001];
   while (fgets(line, 2000, stdin) != NULL) {
+    if(strlen(line) == 1) continue;
     if(line[0]=='#') continue; // comment line
     if (sscanf(line,"%lf %lf %lf",
 	       &entry.coor[0],&entry.coor[1],&entry.coor[2]) == 3) {

@@ -12,14 +12,15 @@
 #include "test_helper.h"
 
 int debug_mode=0;
-%%cvmhbn%_surf_t test_surfs[10];
+%%cvmhbn%_surf_t test_surfs[100];
+int test_surfs_cnt=0;
 
-double init_preset_ucvm_surface(%%cvmhbn%%_surf_t *surfs) {
+double init_preset_ucvm_surface(%%cvmhbn%_surf_t *surfs) {
   char fname[100];
   char line[100];
   char key[50];
   char value[50];
-  File *fp;
+  FILE *fp;
 
   strcpy(fname,"./inputs/%%cvmhbn%_ucvm_surf.dat");
   fp = fopen(fname, "r");
@@ -29,17 +30,17 @@ double init_preset_ucvm_surface(%%cvmhbn%%_surf_t *surfs) {
   int i=0;
   while (fgets(line, sizeof(line), fp) != NULL) {
     if (line[0] != '#' && line[0] != ' ' && line[0] != '\n') {
-       if(sscanf(line, "%lf,%lf,%lf", surfs[i].longitude, surfs[i].latitude, surfs[i].surf)!=3) 
+       if(sscanf(line, "%lf,%lf,%lf", &(surfs[i].longitude), &(surfs[i].latitude), &(surfs[i].surf))!=3) 
          continue;
        i++;
     }
   }
+  test_surfs_cnt=i;
   return i;
 }
 
 double get_preset_ucvm_surface(double y, double x) {
-  int cnt=strlen(test_surfs);
-  for(int i=0; i<cnt; i++) {
+  for(int i=0; i<test_surfs_cnt; i++) {
    if( test_surfs[i].longitude == y && test_surfs[i].latitude == x) {
      return test_surfs[i].surf;
    }
@@ -54,7 +55,7 @@ int get_depth_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect) 
   char line[100];
   char key[50];
   char value[50];
-  File *fp;
+  FILE *fp;
 
   strcpy(fname,"./inputs/%%cvmhbn%_depth_test_point.dat");
   fp = fopen(fname, "r");
@@ -63,7 +64,7 @@ int get_depth_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect) 
   // process one line at a time
   while (fgets(line, sizeof(line), fp) != NULL) {
     if (line[0] != '#' && line[0] != ' ' && line[0] != '\n') {
-       scanf(line, "%s = %s", key, value);
+       sscanf(line, "%s = %s", key, value);
 
        // Which variable are we editing?
        if (strcmp(key, "longitude") == 0) {
@@ -102,7 +103,7 @@ int get_elev_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect, d
   char line[100];
   char key[50];
   char value[50];
-  File *fp;
+  FILE *fp;
 
   strcpy(fname,"./inputs/%%cvmhbn%_elev_test_point.dat");
   fp = fopen(fname, "r");
@@ -111,7 +112,7 @@ int get_elev_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect, d
   // process one line at a time
   while (fgets(line, sizeof(line), fp) != NULL) {
     if (line[0] != '#' && line[0] != ' ' && line[0] != '\n') {
-       scanf(line, "%s = %s", key, value);
+       sscanf(line, "%s = %s", key, value);
 
        // Which variable are we editing?
        if (strcmp(key, "longitude") == 0) {
@@ -122,12 +123,12 @@ int get_elev_test_point(%%cvmhbn%_point_t *pt, %%cvmhbn%_properties_t *expect, d
          pt->latitude = atof(value);
          continue;
        }
-       if (strcmp(key, "pt_elev") == 0) {
-         pt_elevation = atof(value);
+       if (strcmp(key, "pt_elevation") == 0) {
+         *pt_elevation = atof(value);
          continue;
        }
        if (strcmp(key, "pt_surf") == 0) {
-         pt_surf = atof(value);
+         *pt_surf = atof(value);
          continue;
        }
        if (strcmp(key, "vs") == 0) {
