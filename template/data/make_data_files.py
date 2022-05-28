@@ -8,7 +8,7 @@ import getopt
 import sys
 import subprocess
 
-model = "%%CVMHBN%"
+model = "CVMHIBBN"
 
 if sys.version_info.major >= (3) :
   from urllib.request import urlopen
@@ -63,6 +63,7 @@ def main():
             bpath = val + '/' + 'CVMHBN'
             continue
         if (variable == 'model_dir') :
+            ## val==cvmhibbn
             mdir = "./"+val
             bdir = "./"+"cvmhbn"
             continue
@@ -80,12 +81,13 @@ def main():
     blist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@' ]
 
     for b in blist :
-        fname = bdir + "/" + b
-        url = bpath + "/" + fname
+        ffname = bdir + "/" + b
+        fname = mdir + "/" + b
+        url = bpath + "/" + ffname
         print(url, fname)
         download_urlfile(url,fname)
     
-    flist= [ '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
+    flist= [ 'CVMHB-Inner-Borderland-Basin.vo', 'CVMHB-Inner-Borderland-Basin_tag61_basin@@', 'CVMHB-Inner-Borderland-Basin_vp63_basin@@', 'CVMHB-Inner-Borderland-Basin_vs63_basin@@', 'CVMHB-Inner-Borderland-Basin.dat']
 
     for f in flist :
         fname = mdir + "/" +f
