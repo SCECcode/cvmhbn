@@ -1,6 +1,6 @@
-s/%%CVMHBN%/CVMHSSBN/g
-s/%%CVMHBN_DAT%/CVMHB-Salton-Sea-Basin.dat/g
-s/%%CVMHBN_VO%/CVMHB-Salton-Sea-Basin.vo/g
-s/%%cvmhbn%/cvmhssbn/g
-s/%%CVMHBN_MODEL%/CVMH15-1 Salton Sea Velocity Model/g
+s/%%CVMHBN%/CVMHSTBN/g
+s/%%CVMHBN_DAT%/CVMHB-Salton-Trough-Basin.dat/g
+s/%%CVMHBN_VO%/CVMHB-Salton-Trough-Basin.vo/g
+s/%%cvmhbn%/cvmhstbn/g
+s/%%CVMHBN_MODEL%/CVMH15-1 Salton Trough Velocity Model/g
 s/%%CVMHBN_DATA_LABEL%/CVMHB-Salton-Trough-Basin/g

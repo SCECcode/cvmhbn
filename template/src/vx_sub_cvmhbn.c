@@ -10,6 +10,7 @@
 **/
 
 int MEI =1 ;
+int TESTING=1; // output GEO of UTM input 
 
 #include <string.h>
 #include <stdlib.h>
@@ -506,8 +507,8 @@ fprintf(stderr,"  2 after GEO: outsys_geo(%ld) outzone_geo(%ld) outunit_geo(%ld)
     entry->coor_utm[1]=entry->coor[1];
     entry->coor_utm[2]=entry->coor[2];
 
-/********* FOR TESTING
-if(0) {
+/********* FOR TESTING */
+if(TESTING) {
     double SPUTM[2];
     double SPGEO[2];
     long insys_geo = 1;
@@ -526,16 +527,14 @@ if(0) {
          SPGEO,&outsys_geo,&outzone_geo,inparm,&outunit_geo,&outdatum_geo,
          file27, file83,&iflg);
 
-if(%%cvmhbn%_debug) {
 fprintf(stderr,"GEO: SPUTM (%lf, %lf) SPGEO (%lf, %lf)\n", SPUTM[0], SPUTM[1], SPGEO[0], SPGEO[1]);
 fprintf(stderr,"  2 after GEO: insys_geo(%ld) inzone_geo(%ld)\n", insys_geo, inzone_geo);
 fprintf(stderr,"  2 after GEO: inunit_geo(%ld) indatum_geo(%ld) ipr(%ld) jpr(%ld)\n", inunit_geo, indatum_geo, ipr, jpr);
 fprintf(stderr,"  2 after GEO: outsys_geo(%ld) outzone_geo(%ld) outunit_geo(%ld) outdatum_geo(%ld) iflg(%ld)\n",
  outsys_geo, outzone_geo, outunit_geo, outdatum_geo, iflg);
-}
 
 }
-******/
+/******/
 
     break;
   default:

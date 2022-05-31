@@ -3,7 +3,7 @@
 #   input file: inf
 #   -118.938 32.97 1000
 #   usage:
-#   ./run_vx_lite_cvmhibbn.sh  -m ../data/cvmhibbn inf outf
+#   ./run_vx_lite_%%cvmhbn%.sh  -m ../data/%%cvmhbn% inf outf
 #
 
 # Process options

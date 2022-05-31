@@ -8,7 +8,7 @@ import getopt
 import sys
 import subprocess
 
-model = "CVMHIBBN"
+model = "%%CVMHBN%"
 
 if sys.version_info.major >= (3) :
   from urllib.request import urlopen
@@ -63,7 +63,6 @@ def main():
             bpath = val + '/' + 'CVMHBN'
             continue
         if (variable == 'model_dir') :
-            ## val==cvmhibbn
             mdir = "./"+val
             bdir = "./"+"cvmhbn"
             continue
@@ -87,7 +86,7 @@ def main():
         print(url, fname)
         download_urlfile(url,fname)
     
-    flist= [ 'CVMHB-Inner-Borderland-Basin.vo', 'CVMHB-Inner-Borderland-Basin_tag61_basin@@', 'CVMHB-Inner-Borderland-Basin_vp63_basin@@', 'CVMHB-Inner-Borderland-Basin_vs63_basin@@', 'CVMHB-Inner-Borderland-Basin.dat']
+    flist= [ '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
 
     for f in flist :
         fname = mdir + "/" +f
