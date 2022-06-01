@@ -10,7 +10,7 @@
 **/
 
 int MEI =1 ;
-int TESTING=1; // output GEO of UTM input 
+int TESTING=0; // output GEO of UTM input 
 
 #include <string.h>
 #include <stdlib.h>
