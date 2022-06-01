@@ -1,1 +1,7 @@
-## match with test_latlons_gd.txt with cvmh's digital surface at 150.009995
+## match with test_latlons_gd.txt with cvmh's digital surface at 1197.503174
+-118.8041  34.7863  1197.503174
+-118.8041  34.7863   197.503174
+-118.8041  34.7863    48.374174
+-118.8041  34.7863     0.0
+-118.8041  34.7863  -302.49683 
+-118.8041  34.7863  -802.49683
