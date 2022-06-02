@@ -1,0 +1,10 @@
+ln -s /Users/mei/scec/TARGET_ucvm/ucvm/work/model/$1/test_validation/validate_ucvm_bad.txt a
+cut -f 8 -d , a > ud
+cut -f 7 -d , a > lat
+cut -f 6 -d , a > lon
+cut -f 5 -d , a > dd
+cut -f 2,3,4 -d , a > test-elev-$1.in 
+paste lon lat ud > test-depth-ucvm.in
+paste lon lat dd > test-depth-$1.in
+rm ud lat lon dd a
+
