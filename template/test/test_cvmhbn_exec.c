@@ -280,7 +280,7 @@ int test_query_points_by_depth()
   sprintf(outfile, "%s/%s", currentdir, "test-depth-ucvm.out");
 
 /*** seems to differ in result from mac and linux ***/
-/*** DOES NOT NEED???
+/*** DOES NOT NEED anymore??? 
   #ifdef __APPLE__
     sprintf(reffile, "%s/%s", currentdir, "./ref/test-depth-ucvm_mac.ref");
   #else
