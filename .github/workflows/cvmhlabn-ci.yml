@@ -1,0 +1,44 @@
+name: cvmhlabn-ci
+
+#on:
+#  push:
+#    branches: [ main ]
+
+jobs:
+  cvmhlabn-build-standalone-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhlabn/target" >> $GITHUB_ENV
+    - name: checkout cvmhlabn main
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: build cvmhlabn 
+      run: ./.github/scripts/cvmhlabn-build.sh 
+      shell: bash
+    - name: test cvmhlabn standalone
+      run: ./.github/scripts/cvmhlabn-test-standalone.sh
+      shell: bash
+
+  cvmhlabn-build-standalone-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhlabn/target" >> $GITHUB_ENV
+    - name: checkout cvmhlabn main
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: build cvmhlabn
+      run: ./.github/scripts/cvmhlabn-build.sh
+      shell: bash
+    - name: test cvmhlabn standalone
+      run: ./.github/scripts/cvmhlabn-test-standalone.sh
+      shell: bash
