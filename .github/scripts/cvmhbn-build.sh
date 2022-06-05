@@ -7,18 +7,15 @@ if [ $tmp == 'Darwin' ]; then
   brew install automake
 fi
 
-git submodule init
-git submodule update
-cd cvmhbn
-git pull origin main
-cd ..
+cvmhbn/setup.sh $1
+cd $1
 aclocal
 automake --add-missing
 autoconf
 cd data
 ./make_data_files.py
 cd ..
-./configure --prefix=$UCVM_INSTALL_PATH/model/cvmhlabn
+./configure --prefix=$UCVM_INSTALL_PATH/model/$1
 make
 make install
 

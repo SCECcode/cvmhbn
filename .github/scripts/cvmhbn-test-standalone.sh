@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## testing the cvmhlabn part only
+## testing the cvmh basin part only
 
 cd test
 
