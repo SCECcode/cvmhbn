@@ -19,7 +19,7 @@ all: $(bin_PROGRAMS)
 # Executables
 ############################################
 
-%cvmhbn%_vxlite_validate : %%cvmhbn%_vxlite_validate.o 
+%%cvmhbn%_vxlite_validate : %%cvmhbn%_vxlite_validate.o 
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 %%cvmhbn%_api_validate : %%cvmhbn%_api_validate.o 
