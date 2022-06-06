@@ -99,7 +99,7 @@ jobs:
          initiating-repo: 'cvmhlabn'
          target-model: 'cvmhlabn'
     - name: Start SSH via Ngrok
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
