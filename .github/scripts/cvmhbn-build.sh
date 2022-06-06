@@ -7,9 +7,7 @@ if [ $tmp == 'Darwin' ]; then
   brew install automake
 fi
 
-cd ..
-./cvmhbn/setup/setup.sh $1
-cd $1
+cd ../$1
 aclocal
 automake --add-missing
 autoconf

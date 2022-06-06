@@ -12,9 +12,9 @@ jobs:
         python-version: [3.7]
     steps:
     - name: set UCVM_SRC_PATH 
-      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhlabn/ucvm" >> $GITHUB_ENV
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhbn/ucvm" >> $GITHUB_ENV
     - name: set UCVM_INSTALL_PATH 
-      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhlabn/target" >> $GITHUB_ENV
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
 ### build ucvm(basin) first 
     - id: get-ucvm 
       uses: actions/checkout@v2
@@ -38,15 +38,18 @@ jobs:
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
     - name: move stock cvmhlabn away
-      run: (rm -rf $RUNNER_WORKSPACE/cvmhlabn/ucvm/work/model/cvmhlabn)
+      run: (rm -rf $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn)
       shell: bash
-### build cvmhlabn from github 
-    - name: checkout cvmhlabn main
+### get cvmhbn from github 
+    - name: checkout cvmhbn main
       uses: actions/checkout@v2
       with: 
-        path: cvmhlabn
+        ref: main
+### build cvmhlabn from cvmhbn
+      run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
+      shell: bash
     - name: move it to the right location
-      run: (mv cvmhlabn $RUNNER_WORKSPACE/cvmhlabn/ucvm/work/model; pwd; ls)
+      run: (mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model; pwd; ls)
       shell: bash
     - name: build cvmhlabn as part of ucvm 
       run: (cd $RUNNER_WORKSPACE/cvmhlabn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhlabn-build.sh)
