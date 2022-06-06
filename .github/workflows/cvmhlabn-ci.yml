@@ -1,13 +1,13 @@
 name: cvmhlabn-ci
 
-#on:
-#  push:
-#    branches: [ main ]
-
 on:
   push:
-    paths:
-      - 'trigger-runner'
+    branches: [ main ]
+
+#on:
+#  push:
+#    paths:
+#      - 'trigger-runner'
 
 jobs:
   cvmhlabn-build-standalone-mac:

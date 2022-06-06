@@ -9,6 +9,8 @@ fi
 
 cvmhbn/setup.sh $1
 cd $1
+pwd
+ls
 aclocal
 automake --add-missing
 autoconf
