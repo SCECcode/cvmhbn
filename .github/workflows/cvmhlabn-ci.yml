@@ -26,7 +26,7 @@ jobs:
       run: ./.github/scripts/cvmhbn-build.sh cvmhlabn 
       shell: bash
     - name: test cvmhlabn standalone
-      run: ./.github/scripts/cvmhbn-test-standalone.sh
+      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn
       shell: bash
     - name: Start SSH via Ngrok
       if: ${{ success() }}
