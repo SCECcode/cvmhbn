@@ -2,7 +2,9 @@
 
 ## testing the cvmh basin part only
 
-cd ../$1
+if [ -d ../$1  ]; then 
+  cd ../$1
+fi
 
 cd test
 

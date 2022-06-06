@@ -7,7 +7,11 @@ if [ $tmp == 'Darwin' ]; then
   brew install automake
 fi
 
-cd ../$1
+## check if at the right location
+if [ -d ../$1  ]; then 
+  cd ../$1
+fi
+
 aclocal
 automake --add-missing
 autoconf
