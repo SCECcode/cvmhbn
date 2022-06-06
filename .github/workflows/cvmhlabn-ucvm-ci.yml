@@ -46,6 +46,7 @@ jobs:
       with: 
         ref: main
 ### build cvmhlabn from cvmhbn
+    - name: build cvmhlabn main
       run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
       shell: bash
     - name: move it to the right location
@@ -104,6 +105,7 @@ jobs:
       run: (rm -rf $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn)
       shell: bash
 ### build cvmhlabn from cvmhbn
+    - name: build cvmhlabn main
       run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
       shell: bash
     - name: move it to the right location
