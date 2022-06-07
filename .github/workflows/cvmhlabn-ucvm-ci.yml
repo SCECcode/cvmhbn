@@ -110,7 +110,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: main
-        path: cvmbn
+        path: cvmhbn
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
       run: (cd cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
