@@ -77,6 +77,7 @@ jobs:
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
       shell: bash
 
+
   cvmhlabn-build-ucvm-linux:
     runs-on: ubuntu-latest
     strategy:
@@ -139,7 +140,7 @@ jobs:
 #            NGROK_TIMEOUT: 3000
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test cvmhlabn under ucvm
-      run: (cd $RUNNER_WORKSPACE/cvmhlabn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
       shell: bash
 
 
