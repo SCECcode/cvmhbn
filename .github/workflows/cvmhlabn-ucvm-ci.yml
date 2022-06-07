@@ -104,19 +104,17 @@ jobs:
     - name: move stock cvmhlabn away
       run: (rm -rf $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn)
       shell: bash
+### get cvmhbn from github
+    - name: checkout cvmhbn main
+      uses: actions/checkout@v2
+      with:
+        ref: main
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
-      run: (pwd; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
+      run: (./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: move it to the right location
-      run: (pwd;cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      run: (pwd; cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
       shell: bash
     - name: build cvmhlabn as part of ucvm 
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
