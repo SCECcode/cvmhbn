@@ -98,13 +98,6 @@ jobs:
       with:
          initiating-repo: 'cvmhlabn'
          target-model: 'cvmhlabn'
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - id: get-result
       run: more ${{ steps.build-ucvm.outputs.build-log }}
       shell: bash
@@ -113,7 +106,7 @@ jobs:
       shell: bash
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
-      run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
+      run: (pwd; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
       shell: bash
     - name: Start SSH via Ngrok
       if: ${{ failure() }}
@@ -123,7 +116,7 @@ jobs:
             NGROK_TIMEOUT: 3000
             SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: move it to the right location
-      run: (cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      run: (pwd;cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
       shell: bash
     - name: build cvmhlabn as part of ucvm 
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
