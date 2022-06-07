@@ -46,25 +46,25 @@ jobs:
       with: 
         ref: main
         path: cvmhbn
+    - name: move it to the right location
+      run: (mv cvmhbn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      shell: bash
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
-      run: (cd cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhlabn)
       shell: bash
-    - name: move it to the right location
-      run: (pwd; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
-      shell: bash
-    - name: build cvmhlabn as part of ucvm 
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
+    - name: build cvmhlabn as part of ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
       shell: bash
 ### check ucvm is still valid
     - name: check on ucvm
       run: (source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ucvm_query -H)
       shell: bash
     - name: test cvmhlabn standalone
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
       shell: bash
     - name: test cvmhlabn with ucvm
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhlabn-test-ucvm.sh)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
       shell: bash
 #    - name: Start SSH via Ngrok
 #      if: ${{ success() }}
@@ -111,29 +111,22 @@ jobs:
       with:
         ref: main
         path: cvmhbn
+    - name: move it to the right location
+      run: (mv cvmhbn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      shell: bash
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
-      run: (cd cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
       shell: bash
-    - name: move it to the right location
-      run: (pwd; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
-      shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: build cvmhlabn as part of ucvm 
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
       shell: bash
 ### check ucvm is still valid
     - name: check on ucvm
       run: (source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ucvm_query -H)
       shell: bash
     - name: test cvmhlabn standalone
-      run: (cd ..;cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
       shell: bash
     - name: test cvmhlabn with ucvm
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
