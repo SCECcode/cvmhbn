@@ -116,6 +116,13 @@ jobs:
     - name: move it to the right location
       run: (pwd; cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
       shell: bash
+    - name: Start SSH via Ngrok
+      if: ${{ success() }}
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
+            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+            NGROK_TIMEOUT: 3000
+            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: build cvmhlabn as part of ucvm 
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; ./.github/scripts/cvmhbn-build.sh cvmhlabn)
       shell: bash
