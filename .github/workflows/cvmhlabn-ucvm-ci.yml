@@ -45,6 +45,7 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: main
+        path: top
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
       run: (pwd; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
@@ -109,10 +110,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         ref: main
-        path: cvmhbn
+        path: top
 ### build cvmhlabn from cvmhbn
     - name: build cvmhlabn main
-      run: (./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
+      run: (pwd; ./.github/scripts/cvmhbn-generate.sh cvmhlabn) 
       shell: bash
     - name: move it to the right location
       run: (pwd; cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
