@@ -117,7 +117,7 @@ jobs:
       run: (pwd; cd ..; mv cvmhlabn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
       shell: bash
     - name: Start SSH via Ngrok
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
