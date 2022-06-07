@@ -64,7 +64,7 @@ jobs:
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
       shell: bash
     - name: test cvmhlabn with ucvm
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
       shell: bash
 #    - name: Start SSH via Ngrok
 #      if: ${{ success() }}
@@ -129,7 +129,7 @@ jobs:
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn)
       shell: bash
     - name: test cvmhlabn with ucvm
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhlabn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
       shell: bash
 #    - name: Start SSH via Ngrok
 #      if: ${{ success() }}
