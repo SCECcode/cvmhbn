@@ -89,6 +89,9 @@ int vx_setup(const char* data_dir, int data_interp);
 /* Cleanup function to free resources and restore state */
 int vx_cleanup();
 
+/* return version string */
+int vx_version(char *ver);
+
 /* Set Z mode to either elevation, depth, or elev offset */
 int vx_setzmode(vx_zmode_t m);
 

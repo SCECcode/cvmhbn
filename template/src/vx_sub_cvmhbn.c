@@ -398,6 +398,14 @@ int vx_cleanup()
   return(0);
 }
 
+int vx_version(char *ver) {
+  if (no_interp){
+    sprintf(ver, "%s (interp)", VERSION);
+    } else {
+    sprintf(ver, "%s ", VERSION);
+  }
+  return(0);
+}
 
 /* Set query mode: elevation, depth */
 int vx_setzmode(vx_zmode_t m) {

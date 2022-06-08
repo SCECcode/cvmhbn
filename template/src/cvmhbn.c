@@ -262,7 +262,7 @@ int %%cvmhbn%_finalize() {
 int %%cvmhbn%_version(char *ver, int len)
 {
   //const char *%%cvmhbn%_version_string = "%%CVMHBN%";
-  sprintf(ver,"%s",VERSION);
+  vx_versin(ver);
   return UCVM_CODE_SUCCESS;
 }
 
