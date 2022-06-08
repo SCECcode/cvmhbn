@@ -262,12 +262,13 @@ int %%cvmhbn%_finalize() {
 int %%cvmhbn%_version(char *ver, int len)
 {
   int verlen;
-  verlen = strlen(%%cvmhbn%_version_string);
+  verlen = strlen(VERSION);
   if (verlen > len - 1) {
     verlen = len - 1;
   }
   memset(ver, 0, len);
-  strncpy(ver, %%cvmhbn%_version_string, verlen);
+  //const char *%%cvmhbn%_version_string = "%%CVMHBN%";
+  strncpy(ver, VERSION, verlen);
   return UCVM_CODE_SUCCESS;
 }
 
