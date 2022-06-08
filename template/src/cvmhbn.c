@@ -76,7 +76,7 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
         }
 
         /* Init vx */
-        if (vx_setup(%%cvmhbn%_data_directory) != 0) {
+        if (vx_setup(%%cvmhbn%_data_directory, %%cvmhbn%_configuration->interp) != 0) {
           return UCVM_CODE_ERROR;
         }
 
@@ -291,6 +291,8 @@ int %%cvmhbn%_read_configuration(char *file, %%cvmhbn%_configuration_t *config) 
 		return UCVM_CODE_ERROR;
 	}
 
+        config->interp=0;
+
 	// Read the lines in the configuration file.
 	while (fgets(line_holder, sizeof(line_holder), fp) != NULL) {
 		if (line_holder[0] != '#' && line_holder[0] != ' ' && line_holder[0] != '\n') {
@@ -301,7 +303,8 @@ int %%cvmhbn%_read_configuration(char *file, %%cvmhbn%_configuration_t *config) 
   				config->utm_zone = atoi(value);
 			if (strcmp(key, "model_dir") == 0)
 				sprintf(config->model_dir, "%s", value);
-
+			if (strcmp(key, "interp") == 0)
+  				config->interp = atoi(value);
 		}
 	}
 

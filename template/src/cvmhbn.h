@@ -60,6 +60,8 @@ typedef struct %%cvmhbn%_configuration_t {
 	int utm_zone;
 	/** The model directory */
 	char model_dir[1000];
+        /** interp */
+	int interp;
 
 } %%cvmhbn%_configuration_t;
 

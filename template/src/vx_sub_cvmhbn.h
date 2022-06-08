@@ -84,7 +84,7 @@ typedef struct vx_voxel_t
 
 
 /* Initializer */
-int vx_setup(const char* data_dir);
+int vx_setup(const char* data_dir, int data_interp);
 
 /* Cleanup function to free resources and restore state */
 int vx_cleanup();

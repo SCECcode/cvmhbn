@@ -88,10 +88,13 @@ int vx_round(double v) {
 }
 
 /* Setup function to be called prior to querying points */
-int vx_setup(const char *data_dir)
+int vx_setup(const char *data_dir, int data_interp)
 {
   int NCells;
   int n;
+
+  if(data_interp)
+    no_interp = 0;
 
   /* zero-out inparm for gctpc */
   for(n=0;n>15;n++) inparm[n]=0;
