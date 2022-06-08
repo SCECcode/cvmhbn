@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
   }
 
   /* Perform setup */
-  if (vx_setup(modeldir) != 0) {
+  if (vx_setup(modeldir, 0) != 0) {
     fprintf(stderr, "Failed to init vx\n");
     exit(1);
   }

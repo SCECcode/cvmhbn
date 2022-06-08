@@ -399,11 +399,7 @@ int vx_cleanup()
 }
 
 int vx_version(char *ver) {
-  if (no_interp){
-    sprintf(ver, "%s (interp)", VERSION);
-    } else {
-    sprintf(ver, "%s ", VERSION);
-  }
+  sprintf(ver, "%s ", VERSION);
   return(0);
 }
 

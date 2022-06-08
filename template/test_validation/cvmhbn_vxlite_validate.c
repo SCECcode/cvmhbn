@@ -221,7 +221,7 @@ int main(int argc, char* const argv[]) {
         FILE *fp=_process_datfile(datfile);
 
         /* Perform setup */
-        if (vx_setup(modeldir) != 0) {
+        if (vx_setup(modeldir, 0) != 0) {
           fprintf(stderr, "Failed to init vx\n");
           exit(1);
         }
