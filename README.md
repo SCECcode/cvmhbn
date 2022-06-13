@@ -1,6 +1,6 @@
 # CVMH15-1-Basins (cvmhbn)
 
-<a href="https://github.com/sceccode/cvmhbn.git"><img src="https://github.com/sceccode/cvmhbn/wiki/images/cvmhbn-basins.png"></a>
+<a href="https://github.com/sceccode/cvmhbn.git"><img src="https://github.com/sceccode/cvmhbn/wiki/images/cvmhbn_plot.png"></a>
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cvmhbn)

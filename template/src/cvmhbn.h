@@ -28,6 +28,7 @@
 #endif
 
 #define VX_NO_DATA -99999.0
+#define %%cvmhbn%_CONFIG_MAX 1000
 
 // Structures
 /** Defines a point (latitude, longitude, and depth) in WGS84 format */
@@ -77,6 +78,9 @@ typedef struct %%cvmhbn%_model_t {
 /** The version of the model. */
 extern const char *%%cvmhbn%_version_string;
 
+/** The config of the model. */
+extern char *%%cvmhbn%_config_string;
+
 // Variables
 /** Set to 1 when the model is ready for query. */
 extern int %%cvmhbn%_is_initialized;
@@ -104,6 +108,7 @@ int model_init(const char *dir, const char *label);
 int model_finalize();
 /** Returns version information */
 int model_version(char *ver, int len);
+int model_config(char *config);
 /** Queries the model */
 int model_query(%%cvmhbn%_point_t *points, %%cvmhbn%_properties_t *data, int numpts);
 /** Setparam */

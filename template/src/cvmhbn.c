@@ -17,6 +17,9 @@
 /** The version of the model. */
 const char *%%cvmhbn%_version_string = "%%CVMHBN%";
 
+/** The config of the model */
+char %%cvmhbn%_version_string[%%cvmhbn%_CONFIG_MAX];
+
 int %%cvmhbn%_is_initialized = 0;
 
 /** Location of the binary data files. */
@@ -265,6 +268,25 @@ int %%cvmhbn%_version(char *ver, int len)
   vx_version(ver);
   return UCVM_CODE_SUCCESS;
 }
+
+/**
+ * Returns the model config information.
+ *
+ * @param key Config key string to return.
+ * @return Zero
+ */
+int %%cvmhbn%_config(char *config)
+{
+  int sz=strlen(%%cvmhbn%_config_string);
+  if(len > 0) {
+    config=strndup(%%cvmhbn%_config_string,sz);
+    if(config == NULL) { 
+      return UCM_CODE_ERROR;
+    }
+  }
+  return UCVM_CODE_SUCCESS;
+}
+
 
 /**
  * Reads the configuration file describing the various properties of %%CVMHBN% and populates
