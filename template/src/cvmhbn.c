@@ -18,7 +18,7 @@
 const char *%%cvmhbn%_version_string = "%%CVMHBN%";
 
 /** The config of the model */
-char %%cvmhbn%_version_config[%%cvmhbn%_CONFIG_MAX];
+char *%%cvmhbn%_config_string;
 
 int %%cvmhbn%_is_initialized = 0;
 
@@ -57,6 +57,8 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
 	// Initialize variables.
 	%%cvmhbn%_configuration = calloc(1, sizeof(%%cvmhbn%_configuration_t));
 	%%cvmhbn%_velocity_model = calloc(1, sizeof(%%cvmhbn%_model_t));
+	%%cvmhbn%_config_string = calloc(%%cvmhbn%_CONFIG_MAX, sizeof(char));
+        %%cvmhbn%_config_string[0]='\0';
 
 	// Configuration file location when built with UCVM
 	sprintf(configbuf, "%s/model/%s/data/config", dir, label);
@@ -82,6 +84,9 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
         if (vx_setup(%%cvmhbn%_data_directory, %%cvmhbn%_configuration->interp) != 0) {
           return UCVM_CODE_ERROR;
         }
+
+        /* setup config_string  interp=0 or interp= 1*/
+        strcpy(%%cvmhbn%_config_string,"interp=%d\n",%%cvmhbn%_configuration->interp);
 
 	// Let everyone know that we are initialized and ready for business.
 	%%cvmhbn%_is_initialized = 1;
@@ -251,7 +256,13 @@ fprintf(stderr," **** in HERE looking for a new surface ..\n");
  */
 int %%cvmhbn%_finalize() {
         vx_cleanup();
+
 	%%cvmhbn%_is_initialized = 0;
+
+	free(%%cvmhbn%_configuration);
+	free(%%cvmhbn%_velocity_model);
+	free(%%cvmhbn%_config_string);
+
 	return UCVM_CODE_SUCCESS;
 }
 
@@ -275,16 +286,14 @@ int %%cvmhbn%_version(char *ver, int len)
  * @param key Config key string to return.
  * @return Zero
  */
-int %%cvmhbn%_config(char *config)
+int %%cvmhbn%_config(char **config)
 {
   int sz=strlen(%%cvmhbn%_config_string);
   if(sz > 0) {
-    config=strndup(%%cvmhbn%_config_string,sz);
-    if(config == NULL) { 
-      return UCVM_CODE_ERROR;
-    }
+    *config=%%cvmhbn%_config_string,sz;
+      return UCVM_CODE_SUCCESS;
   }
-  return UCVM_CODE_SUCCESS;
+  return UCVM_CODE_ERROR;
 }
 
 
@@ -357,6 +366,7 @@ void %%cvmhbn%_print_error(char *err) {
  * @return Success or failure.
  */
 int model_init(const char *dir, const char *label) {
+
 	return %%cvmhbn%_init(dir, label);
 }
 
