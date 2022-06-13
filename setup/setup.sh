@@ -34,7 +34,7 @@ cd ${TARGET}
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/CITATION.cff > CITATION.cff
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/configure.ac > configure.ac
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/Doxyfile > Doxyfile
-sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/README.md > README.md
+sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/README.md.template > README.md
 
 ## setup data
 mkdir ${TARGET}/data
