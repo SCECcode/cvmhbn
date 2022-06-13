@@ -18,7 +18,7 @@
 const char *%%cvmhbn%_version_string = "%%CVMHBN%";
 
 /** The config of the model */
-char %%cvmhbn%_version_string[%%cvmhbn%_CONFIG_MAX];
+char %%cvmhbn%_version_config[%%cvmhbn%_CONFIG_MAX];
 
 int %%cvmhbn%_is_initialized = 0;
 
@@ -278,10 +278,10 @@ int %%cvmhbn%_version(char *ver, int len)
 int %%cvmhbn%_config(char *config)
 {
   int sz=strlen(%%cvmhbn%_config_string);
-  if(len > 0) {
+  if(sz > 0) {
     config=strndup(%%cvmhbn%_config_string,sz);
     if(config == NULL) { 
-      return UCM_CODE_ERROR;
+      return UCVM_CODE_ERROR;
     }
   }
   return UCVM_CODE_SUCCESS;

@@ -9,7 +9,6 @@
 
 **/
 
-int MEI =1 ;
 int TESTING=0; // output GEO of UTM input 
 
 #include <string.h>
@@ -142,7 +141,7 @@ int vx_setup(const char *data_dir, int data_interp)
     fprintf(stderr,"    hr_a.N %d %d %d\n", hr_a.N[0],hr_a.N[1],hr_a.N[2]);
   }
 
-  if( MEI || (hr_a.MIN[0] != 0) || (hr_a.MAX[0] != 1)) {
+  {
 /* origin */
       float origin0hr= hr_a.O[0] + hr_a.U[0] * hr_a.MIN[0];
       float origin1hr= hr_a.O[1] + hr_a.V[1] * hr_a.MIN[1];
@@ -177,20 +176,6 @@ int vx_setup(const char *data_dir, int data_interp)
         fprintf(stderr," wmax %.0f %.0f %.0f\n", hr_a.W[0],hr_a.W[1],hr_a.W[2]);
         fprintf(stderr," step %f %f %f\n\n", step0hr, step1hr, step2hr);
       }
-
-      } else { // get the info out
-        if(%%cvmhbn%_debug) {
-          step0hr=((hr_a.MAX[0] - hr_a.MIN[0]) * hr_a.U[0]) / (hr_a.N[0]-1);
-          step1hr=((hr_a.MAX[1] - hr_a.MIN[1]) * hr_a.V[1]) / (hr_a.N[1]-1);
-          step2hr=((hr_a.MAX[2] - hr_a.MIN[2]) * hr_a.W[2]) / (hr_a.N[2]-1);
-          fprintf(stderr,">>>Info: read HR------\n");
-          fprintf(stderr," origin %.0f %.0f %.0f\n", hr_a.O[0],hr_a.O[1],hr_a.O[2]);
-          fprintf(stderr," umax %.0f %.0f %.0f\n", hr_a.U[0],hr_a.U[1],hr_a.U[2]);
-          fprintf(stderr," vmax %.0f %.0f %.0f\n", hr_a.V[0],hr_a.V[1],hr_a.V[2]);
-          fprintf(stderr," wmax %.0f %.0f %.0f\n", hr_a.W[0],hr_a.W[1],hr_a.W[2]);
-          fprintf(stderr," step %f %f %f\n\n", step0hr, step1hr, step2hr);
-      }
-
    }
 
   NCells=hr_a.N[0]*hr_a.N[1]*hr_a.N[2];
@@ -356,15 +341,9 @@ if(%%cvmhbn%_debug) {fprintf(stderr,"using HR VS file..%s\n\n",p_vs63_basin.FN);
   step_to[1]=to_a.V[1]/(to_a.N[1]-1);
   step_to[2]=0.0;
 
-  if( MEI || (hr_a.MIN[0] != 0) || (hr_a.MAX[0] != 1)) {
-      step_hr[0]=step0hr;
-      step_hr[1]=step1hr;
-      step_hr[2]=step2hr;
-      } else {
-          step_hr[0]=hr_a.U[0]/(hr_a.N[0]-1);
-          step_hr[1]=hr_a.V[1]/(hr_a.N[1]-1);
-          step_hr[2]=hr_a.W[2]/(hr_a.N[2]-1);
-  }
+  step_hr[0]=step0hr;
+  step_hr[1]=step1hr;
+  step_hr[2]=step2hr;
   
   is_setup = True;
 
