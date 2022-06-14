@@ -80,6 +80,7 @@ extern const char *%%cvmhbn%_version_string;
 
 /** The config of the model. */
 extern char *%%cvmhbn%_config_string;
+extern int %%cvmhbn%_config_sz;
 
 // Variables
 /** Set to 1 when the model is ready for query. */
@@ -108,7 +109,7 @@ int model_init(const char *dir, const char *label);
 int model_finalize();
 /** Returns version information */
 int model_version(char *ver, int len);
-int model_config(char **config);
+int model_config(char **config, int *sz);
 /** Queries the model */
 int model_query(%%cvmhbn%_point_t *points, %%cvmhbn%_properties_t *data, int numpts);
 /** Setparam */

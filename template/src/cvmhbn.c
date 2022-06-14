@@ -19,6 +19,7 @@ const char *%%cvmhbn%_version_string = "%%CVMHBN%";
 
 /** The config of the model */
 char *%%cvmhbn%_config_string;
+int %%cvmhbn%_config_sz;
 
 int %%cvmhbn%_is_initialized = 0;
 
@@ -59,6 +60,7 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
 	%%cvmhbn%_velocity_model = calloc(1, sizeof(%%cvmhbn%_model_t));
 	%%cvmhbn%_config_string = calloc(%%cvmhbn%_CONFIG_MAX, sizeof(char));
         %%cvmhbn%_config_string[0]='\0';
+        %%cvmhbn%_config_sz=0;
 
 	// Configuration file location when built with UCVM
 	sprintf(configbuf, "%s/model/%s/data/config", dir, label);
@@ -87,6 +89,7 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
 
         /* setup config_string  interp=0 or interp= 1*/
         strcpy(%%cvmhbn%_config_string,"interp=%d\n",%%cvmhbn%_configuration->interp);
+        %%cvmhbn%_config_sz=1;
 
 	// Let everyone know that we are initialized and ready for business.
 	%%cvmhbn%_is_initialized = 1;
@@ -262,6 +265,7 @@ int %%cvmhbn%_finalize() {
 	free(%%cvmhbn%_configuration);
 	free(%%cvmhbn%_velocity_model);
 	free(%%cvmhbn%_config_string);
+	%%cvmhbn%_config_sz=0;
 
 	return UCVM_CODE_SUCCESS;
 }
@@ -286,12 +290,13 @@ int %%cvmhbn%_version(char *ver, int len)
  * @param key Config key string to return.
  * @return Zero
  */
-int %%cvmhbn%_config(char **config)
+int %%cvmhbn%_config(char **config, int *sz)
 {
   int sz=strlen(%%cvmhbn%_config_string);
   if(sz > 0) {
     *config=%%cvmhbn%_config_string,sz;
-      return UCVM_CODE_SUCCESS;
+    *sz=%%cvmhbn%_config_sz;
+    return UCVM_CODE_SUCCESS;
   }
   return UCVM_CODE_ERROR;
 }
