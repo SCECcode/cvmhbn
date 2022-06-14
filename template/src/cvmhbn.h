@@ -28,7 +28,7 @@
 #endif
 
 #define VX_NO_DATA -99999.0
-#define %%cvmhbn%_CONFIG_MAX 1000
+#define %%CVMHBN%_CONFIG_MAX 1000
 
 // Structures
 /** Defines a point (latitude, longitude, and depth) in WGS84 format */
