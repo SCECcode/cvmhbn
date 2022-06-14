@@ -88,7 +88,7 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
         }
 
         /* setup config_string  interp=0 or interp= 1*/
-        sprintf(%%cvmhbn%_config_string,"interp=%d\n",%%cvmhbn%_configuration->interp);
+        sprintf(%%cvmhbn%_config_string,"config = %s, interp = %d\n",configbuf, %%cvmhbn%_configuration->interp);
         %%cvmhbn%_config_sz=1;
 
 	// Let everyone know that we are initialized and ready for business.
