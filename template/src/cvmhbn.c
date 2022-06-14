@@ -88,7 +88,7 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
         }
 
         /* setup config_string  interp=0 or interp= 1*/
-        strcpy(%%cvmhbn%_config_string,"interp=%d\n",%%cvmhbn%_configuration->interp);
+        sprintf(%%cvmhbn%_config_string,"interp=%d\n",%%cvmhbn%_configuration->interp);
         %%cvmhbn%_config_sz=1;
 
 	// Let everyone know that we are initialized and ready for business.
@@ -292,9 +292,9 @@ int %%cvmhbn%_version(char *ver, int len)
  */
 int %%cvmhbn%_config(char **config, int *sz)
 {
-  int sz=strlen(%%cvmhbn%_config_string);
-  if(sz > 0) {
-    *config=%%cvmhbn%_config_string,sz;
+  int len=strlen(%%cvmhbn%_config_string);
+  if(len > 0) {
+    *config=%%cvmhbn%_config_string;
     *sz=%%cvmhbn%_config_sz;
     return UCVM_CODE_SUCCESS;
   }
@@ -430,6 +430,9 @@ int (*get_model_finalize())() {
 }
 int (*get_model_version())(char *, int) {
          return &%%cvmhbn%_version;
+}
+int (*get_model_config())(char **, int*) {
+         return &%%cvmhbn%_config;
 }
 int (*get_model_setparam())(int, int, ...) {
          return &%%cvmhbn%_setparam;
