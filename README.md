@@ -39,7 +39,7 @@ As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use basin labe
 4. cvmhibbn (Inner Borderland)
 5. cvmhrbn  (Ridge Basin)
 6. cvmhssbn (Salton Sea)
-7. cvmhsbbn (San Bernadino)
+7. cvmhsbbn (San Bernardino)
 8. cvmhsbcbn (Santa Barbara Channel)
 9. cvmhsmbn (Santa Maria)
 
