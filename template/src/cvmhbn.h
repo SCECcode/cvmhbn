@@ -104,6 +104,8 @@ int model_init(const char *dir, const char *label);
 int model_finalize();
 /** Returns version information */
 int model_version(char *ver, int len);
+/** Returns config information */
+int model_config(char **key, char **val, int len);
 /** Queries the model */
 int model_query(%%cvmhbn%_point_t *points, %%cvmhbn%_properties_t *data, int numpts);
 /** Setparam */

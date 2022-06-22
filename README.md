@@ -19,15 +19,16 @@ CVMH Basin is the templated base code for generate basin model access code for v
 
 ## Installation
 
-The base code is included as a git submodule in each target CVMH basin model git repo
-(https://www.w3docs.com/learn-git/git-submodule.html)
-
-To push updated base code from basin model,
+After download the cvmhbn with github, to create each basin model 
 
 <pre>
-  git submodule update --remote
+./setup/setup.sh basin_name
+cd basin_name/data
+./make_data_files.py
 </pre>
 
+To build each basin as a standalone installation or as part of UCVM, please follow the README within
+each basin model 
 
 ### UCVM
 

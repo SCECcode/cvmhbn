@@ -267,6 +267,20 @@ int %%cvmhbn%_version(char *ver, int len)
 }
 
 /**
+ * Returns the config information.
+ *
+ * @param key Config string to return.
+ * @param val Value of config.
+ * @param len Maximum length of config terms.
+ * @return Zero
+ */
+int %%cvmhbn%_version(char **key, char **val, int len)
+{
+  return UCVM_CODE_SUCCESS;
+}
+
+
+/**
  * Reads the configuration file describing the various properties of %%CVMHBN% and populates
  * the configuration struct. This assumes configuration has been "calloc'ed" and validates
  * that each value is not zero at the end.
