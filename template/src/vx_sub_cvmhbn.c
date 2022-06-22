@@ -144,8 +144,7 @@ int vx_setup(const char *data_dir, int data_interp)
     fprintf(stderr,"    hr_a.N %d %d %d\n", hr_a.N[0],hr_a.N[1],hr_a.N[2]);
   }
 
-// if((hr_a.MIN[0] != 0) || (hr_a.MAX[0] != 1))
-  { 
+  {
 /* origin */
       float origin0hr= hr_a.O[0] + hr_a.U[0] * hr_a.MIN[0];
       float origin1hr= hr_a.O[1] + hr_a.V[1] * hr_a.MIN[1];
@@ -345,7 +344,6 @@ if(%%cvmhbn%_debug) {fprintf(stderr,"using HR VS file..%s\n\n",p_vs63_basin.FN);
   step_to[1]=to_a.V[1]/(to_a.N[1]-1);
   step_to[2]=0.0;
 
-//if((hr_a.MIN[0] != 0) || (hr_a.MAX[0] != 1))
   {
     step_hr[0]=step0hr;
     step_hr[1]=step1hr;

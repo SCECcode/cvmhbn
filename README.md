@@ -1,6 +1,6 @@
 # CVMH15-1-Basins (cvmhbn)
 
-<a href="https://github.com/sceccode/cvmhbn.git"><img src="https://github.com/sceccode/cvmhbn/wiki/images/cvmhbn-basins.png"></a>
+<a href="https://github.com/sceccode/cvmhbn.git"><img src="https://github.com/sceccode/cvmhbn/wiki/images/cvmhbn_plot.png"></a>
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cvmhbn)
@@ -40,7 +40,7 @@ As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use basin labe
 4. cvmhibbn (Inner Borderland)
 5. cvmhrbn  (Ridge Basin)
 6. cvmhssbn (Salton Sea)
-7. cvmhsbbn (San Bernadino)
+7. cvmhsbbn (San Bernardino)
 8. cvmhsbcbn (Santa Barbara Channel)
 9. cvmhsmbn (Santa Maria)
 

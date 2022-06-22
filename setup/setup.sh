@@ -34,10 +34,10 @@ cd ${TARGET}
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/CITATION.cff > CITATION.cff
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/configure.ac > configure.ac
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/Doxyfile > Doxyfile
-sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/README.md > README.md
+sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/README.md.template > README.md
 
 ## setup data
-mkdir ${TARGET}/data
+mkdir -p ${TARGET}/data
 cd ${TARGET}/data
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/data/Makefile.am > Makefile.am
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/data/config > config
@@ -80,7 +80,7 @@ cd ${TARGET}/test/ref
 cp ${CVMHBN}/template/test/ref/${BN}/* .
 
 ## setup test_validation
-mkdir ${TARGET}/test_validation
+mkdir -p ${TARGET}/test_validation
 cd ${TARGET}/test_validation
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/test_validation/Makefile.am > Makefile.am
 sed -f ${CVMHBN}/setup/sed_command/${BN_SED} ${CVMHBN}/template/test_validation/run_api_validate.sh > run_api_validate.sh

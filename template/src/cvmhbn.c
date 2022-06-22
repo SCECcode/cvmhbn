@@ -17,6 +17,10 @@
 /** The version of the model. */
 const char *%%cvmhbn%_version_string = "%%CVMHBN%";
 
+/** The config of the model */
+char *%%cvmhbn%_config_string;
+int %%cvmhbn%_config_sz=0;
+
 int %%cvmhbn%_is_initialized = 0;
 
 /** Location of the binary data files. */
@@ -54,6 +58,8 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
 	// Initialize variables.
 	%%cvmhbn%_configuration = calloc(1, sizeof(%%cvmhbn%_configuration_t));
 	%%cvmhbn%_velocity_model = calloc(1, sizeof(%%cvmhbn%_model_t));
+	%%cvmhbn%_config_string = calloc(%%CVMHBN%_CONFIG_MAX, sizeof(char));
+        %%cvmhbn%_config_string[0]='\0';
 
 	// Configuration file location when built with UCVM
 	sprintf(configbuf, "%s/model/%s/data/config", dir, label);
@@ -79,6 +85,10 @@ int %%cvmhbn%_init(const char *dir, const char *label) {
         if (vx_setup(%%cvmhbn%_data_directory, %%cvmhbn%_configuration->interp) != 0) {
           return UCVM_CODE_ERROR;
         }
+
+        /* setup config_string  interp=0 or interp= 1*/
+        sprintf(%%cvmhbn%_config_string,"config = %s, interp = %d\n",configbuf, %%cvmhbn%_configuration->interp);
+        %%cvmhbn%_config_sz=2;
 
 	// Let everyone know that we are initialized and ready for business.
 	%%cvmhbn%_is_initialized = 1;
@@ -248,7 +258,14 @@ fprintf(stderr," **** in HERE looking for a new surface ..\n");
  */
 int %%cvmhbn%_finalize() {
         vx_cleanup();
+
 	%%cvmhbn%_is_initialized = 0;
+
+	free(%%cvmhbn%_configuration);
+	free(%%cvmhbn%_velocity_model);
+	free(%%cvmhbn%_config_string);
+	%%cvmhbn%_config_sz=0;
+
 	return UCVM_CODE_SUCCESS;
 }
 
@@ -267,16 +284,20 @@ int %%cvmhbn%_version(char *ver, int len)
 }
 
 /**
- * Returns the config information.
+ * Returns the model config information.
  *
- * @param key Config string to return.
- * @param val Value of config.
- * @param len Maximum length of config terms.
+ * @param key Config key string to return.
  * @return Zero
  */
-int %%cvmhbn%_version(char **key, char **val, int len)
+int %%cvmhbn%_config(char **config, int *sz)
 {
-  return UCVM_CODE_SUCCESS;
+  int len=strlen(%%cvmhbn%_config_string);
+  if(len > 0) {
+    *config=%%cvmhbn%_config_string;
+    *sz=%%cvmhbn%_config_sz;
+    return UCVM_CODE_SUCCESS;
+  }
+  return UCVM_CODE_ERROR;
 }
 
 
@@ -349,6 +370,7 @@ void %%cvmhbn%_print_error(char *err) {
  * @return Success or failure.
  */
 int model_init(const char *dir, const char *label) {
+
 	return %%cvmhbn%_init(dir, label);
 }
 
@@ -394,7 +416,17 @@ int model_finalize() {
  */
 int model_version(char *ver, int len) {
 	return %%cvmhbn%_version(ver, len);
-}
+
+/**
+ * Version function loaded and called by the UCVM library. Calls %%cvmhbn%_config.
+ *
+ * @param config Config string to return.
+ * @param sz length of Config terms.
+ * @return Zero
+ */
+int model_config(char **config, int *sz) {
+        return %%cvmhbn%_config(config, sz);
+
 
 int (*get_model_init())(const char *, const char *) {
         return &%%cvmhbn%_init;
@@ -407,6 +439,9 @@ int (*get_model_finalize())() {
 }
 int (*get_model_version())(char *, int) {
          return &%%cvmhbn%_version;
+}
+int (*get_model_config())(char **, int*) {
+         return &%%cvmhbn%_config;
 }
 int (*get_model_setparam())(int, int, ...) {
          return &%%cvmhbn%_setparam;
