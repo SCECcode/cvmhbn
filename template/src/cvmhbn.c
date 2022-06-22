@@ -416,6 +416,7 @@ int model_finalize() {
  */
 int model_version(char *ver, int len) {
 	return %%cvmhbn%_version(ver, len);
+}
 
 /**
  * Version function loaded and called by the UCVM library. Calls %%cvmhbn%_config.
