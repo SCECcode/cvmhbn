@@ -426,6 +426,7 @@ int model_version(char *ver, int len) {
  */
 int model_config(char **config, int *sz) {
         return %%cvmhbn%_config(config, sz);
+}
 
 
 int (*get_model_init())(const char *, const char *) {

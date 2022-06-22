@@ -10,9 +10,6 @@
 **/
 int TESTING=0; // output GEO of UTM input 
 
-// internal cvmhbn configuration
-int no_interp=1;
-
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -41,6 +38,7 @@ float p0_NO_DATA_VALUE = -99999.0; // p0.NO_DATA_VALUE
 //float p0_NO_DATA_VALUE = 0.0; // p0.NO_DATA_VALUE 
 int p0_ESIZE = 4; // p0.ESIZE
 
+// internal cvmhbn configuration
 int no_interp=1;
 int check_surface=0; // this is when query for surface
 
