@@ -355,7 +355,7 @@ if(%%cvmhbn%_debug) {fprintf(stderr,"using HR VS file..%s\n\n",p_vs63_basin.FN);
   return(0);
 }
 
-int vx_config(char **key, char **val, len) {
+int vx_config(char **key, char **val, int len) {
   strcpy(key[0],"interp");
   if(no_interp) {
      strcpy(val[0],"no interp");
