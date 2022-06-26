@@ -1,0 +1,69 @@
+name: cvmhibbn-ci
+
+on:
+  push:
+    branches: [ main ]
+
+#on:
+#  push:
+#    paths:
+#      - 'trigger-runner'
+
+jobs:
+  cvmhibbn-build-standalone-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+    - name: checkout cvmhbn main
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: generate cvmhibbn 
+      run: ./.github/scripts/cvmhbn-generate.sh cvmhibbn 
+      shell: bash
+    - name: build cvmhibbn 
+      run: ./.github/scripts/cvmhbn-build.sh cvmhibbn 
+      shell: bash
+    - name: test cvmhibbn standalone
+      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhibbn
+      shell: bash
+#    - name: Start SSH via Ngrok
+#      if: ${{ success() }}
+#      uses: luchihoratiu/debug-via-ssh@main
+#      with:
+#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#            NGROK_TIMEOUT: 3000
+#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+
+  cvmhibbn-build-standalone-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+    - name: checkout cvmhbn main
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+    - name: generate cvmhibbn 
+      run: ./.github/scripts/cvmhbn-generate.sh cvmhibbn 
+      shell: bash
+    - name: build cvmhibbn
+      run: ./.github/scripts/cvmhbn-build.sh cvmhibbn
+      shell: bash
+    - name: Start SSH via Ngrok
+      if: ${{ failure() }}
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
+            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+            NGROK_TIMEOUT: 3000
+            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - name: test cvmhibbn standalone
+      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhibbn
+      shell: bash
