@@ -1,13 +1,8 @@
 name: cvmhvbn-ci
 
 on:
-  push:
-    branches: [ main ]
-
-#on:
-#  push:
-#    paths:
-#      - 'trigger-runner'
+  repository_dispatch:
+    types: [trigger-cvmhvbn-ci]
 
 jobs:
   cvmhvbn-build-standalone-mac:
@@ -40,6 +35,8 @@ jobs:
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhvbn-build-standalone-linux:
+    if: ${{ always() }}
+    needs: [cvmhvbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
