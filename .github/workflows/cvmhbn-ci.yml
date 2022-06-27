@@ -7,11 +7,14 @@ on:
 ## start jobs one at a time
 
 jobs:
-- name: Trigger next workflow
-  if: success()
-  uses: peter-evans/repository-dispatch@v1
-  with:
-    token: ${{ secrets.TRIGGER_CVMHVBN_CI }}
-    repository: ${{ github.repository }}
-    event-type: trigger-cvmhvbn-ci
-    client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+  cvmhbn-top:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger next workflow
+        if: success()
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.TRIGGER_CVMHVBN_CI }}
+          repository: ${{ github.repository }}
+          event-type: trigger-cvmhvbn-ci
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
