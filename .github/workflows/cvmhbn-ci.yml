@@ -9,6 +9,9 @@ on:
 jobs:
   cvmhbn-top:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
     steps:
       - name: cvmhbn top workflow
       run: echo "Starting CVMHBN... "
