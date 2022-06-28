@@ -12,8 +12,6 @@ on:
 
 jobs:
   cvmhvbn-build-standalone-linux:
-    if: ${{ always() }}
-    needs: [cvmhvbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
