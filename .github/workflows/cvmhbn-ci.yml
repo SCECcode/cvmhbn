@@ -4,14 +4,16 @@ on:
   push:
     branches: [ main ]
 
-## start jobs one at a time
-
 jobs:
   cvmhbn-top:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         python-version: [3.7]
     steps:
-      - name: cvmhbn top workflow
-      run: echo "Starting CVMHBN... "
+    - name: set UCVM_SRC_PATH 
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhbn/ucvm" >> $GITHUB_ENV
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+
+
