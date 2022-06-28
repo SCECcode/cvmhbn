@@ -1,8 +1,14 @@
 name: cvmhvbn-ci
 
+#on:
+#  repository_dispatch:
+#    types: [trigger-cvmhvbn-ci]
+
 on:
-  repository_dispatch:
-    types: [trigger-cvmhvbn-ci]
+   workflow_run:
+      workflows: [cvmhbn-ci]
+      types:
+        - completed
 
 jobs:
   cvmhvbn-build-standalone-mac:
