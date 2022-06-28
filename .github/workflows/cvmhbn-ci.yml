@@ -12,4 +12,3 @@ jobs:
     steps:
       - name: cvmhbn top workflow
       run: echo "Starting CVMHBN... "
-      shell: bash
