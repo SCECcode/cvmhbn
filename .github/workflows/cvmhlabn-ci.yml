@@ -1,17 +1,11 @@
-name: cvmhvbn-ci
-
-#on:
-#  repository_dispatch:
-#    types: [trigger-cvmhvbn-ci]
+name: cvmhlabn-ci
 
 on:
-   workflow_run:
-      workflows: [cvmhbn-ci]
-      types:
-        - completed
+  push:
+    branches: [ main ]
 
 jobs:
-  cvmhvbn-build-standalone-mac:
+  cvmhlabn-build-standalone-mac:
     runs-on: macos-latest
     strategy:
       matrix:
@@ -23,14 +17,14 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: main
-    - name: generate cvmhvbn 
-      run: ./.github/scripts/cvmhbn-generate.sh cvmhvbn 
+    - name: generate cvmhlabn 
+      run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
       shell: bash
-    - name: build cvmhvbn 
-      run: ./.github/scripts/cvmhbn-build.sh cvmhvbn 
+    - name: build cvmhlabn 
+      run: ./.github/scripts/cvmhbn-build.sh cvmhlabn 
       shell: bash
-    - name: test cvmhvbn standalone
-      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhvbn
+    - name: test cvmhlabn standalone
+      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn
       shell: bash
 #    - name: Start SSH via Ngrok
 #      if: ${{ success() }}
@@ -40,9 +34,9 @@ jobs:
 #            NGROK_TIMEOUT: 3000
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
-  cvmhvbn-build-standalone-linux:
-    if: ${{ always() }}
-    needs: [cvmhvbn-build-standalone-mac]
+  cvmhlabn-build-standalone-linux:
+   if: ${{ success() }}
+    needs: [cvmhlabn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -54,19 +48,19 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: main
-    - name: generate cvmhvbn 
-      run: ./.github/scripts/cvmhbn-generate.sh cvmhvbn 
+    - name: generate cvmhlabn 
+      run: ./.github/scripts/cvmhbn-generate.sh cvmhlabn 
       shell: bash
-    - name: build cvmhvbn
-      run: ./.github/scripts/cvmhbn-build.sh cvmhvbn
+    - name: build cvmhlabn
+      run: ./.github/scripts/cvmhbn-build.sh cvmhlabn
       shell: bash
     - name: Start SSH via Ngrok
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
             NGROK_TIMEOUT: 3000
             SSH_PASS: ${{ secrets.NGROK_SECRET }}
-    - name: test cvmhvbn standalone
-      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhvbn
+    - name: test cvmhlabn standalone
+      run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhlabn
       shell: bash

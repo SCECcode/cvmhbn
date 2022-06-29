@@ -1,13 +1,14 @@
 name: cvmhvbn-ci
 
-on:
-  push:
-    branches: [ main ]
-
 #on:
-#  push:
-#    paths:
-#      - 'trigger-runner'
+#  repository_dispatch:
+#    types: [trigger-cvmhvbn-ci]
+
+on:
+   workflow_run:
+      workflows: [cvmhbn-ci]
+      types:
+        - completed
 
 jobs:
   cvmhvbn-build-standalone-mac:
@@ -40,6 +41,8 @@ jobs:
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhvbn-build-standalone-linux:
+    if: ${{ always() }}
+    needs: [cvmhvbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -58,7 +61,7 @@ jobs:
       run: ./.github/scripts/cvmhbn-build.sh cvmhvbn
       shell: bash
     - name: Start SSH via Ngrok
-      if: ${{ failure() }}
+      if: ${{ success() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}

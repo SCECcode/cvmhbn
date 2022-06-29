@@ -40,6 +40,8 @@ jobs:
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhibbn-build-standalone-linux:
+    if: ${{ success() }}
+    needs: [cvmhibbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
