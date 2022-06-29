@@ -35,7 +35,7 @@ jobs:
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhlabn-build-standalone-linux:
-   if: ${{ success() }}
+    if: ${{ success() }}
     needs: [cvmhlabn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
