@@ -32,7 +32,7 @@ def download_urlfile(url,fname):
   except:
     e = sys.exc_info()[0]
     print("Exception retrieving and saving model datafiles:",e)
-    raise
+    raise 
   return True
 
 def main():
@@ -84,7 +84,10 @@ def main():
         fname = mdir + "/" + b
         url = bpath + "/" + ffname
         print(url, fname)
-        download_urlfile(url,fname)
+        try:
+          download_urlfile(url,fname)
+        except:
+          sys.exit(1)
     
     flist= [ '%%CVMHBN_DATA_LABEL%.vo', '%%CVMHBN_DATA_LABEL%_tag61_basin@@', '%%CVMHBN_DATA_LABEL%_vp63_basin@@', '%%CVMHBN_DATA_LABEL%_vs63_basin@@', '%%CVMHBN_DATA_LABEL%.dat']
 
@@ -92,7 +95,10 @@ def main():
         fname = mdir + "/" +f
         url = path + "/" + fname
         print(url, fname)
-        download_urlfile(url,fname)
+        try: 
+          download_urlfile(url,fname)
+        except:
+          sys.exit(1)
 
     print("\nDone!")
 
