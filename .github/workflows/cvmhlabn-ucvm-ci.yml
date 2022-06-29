@@ -81,9 +81,8 @@ jobs:
 
 
   cvmhlabn-build-ucvm-linux:
-   if: ${{ success() }}
+    if: ${{ success() }}
     needs: [cvmhlabn-build-ucvm-mac]
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
