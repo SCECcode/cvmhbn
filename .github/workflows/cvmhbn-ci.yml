@@ -16,4 +16,13 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
 
+  cvmhbn-top-cvmhvbn:
+    if: ${{ always() }}
+    needs: [ucvm-build-albacore-lsu-wf]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+
 
