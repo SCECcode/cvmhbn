@@ -1,8 +1,10 @@
 name: cvmhlabn-ucvm-ci
 
 on:
-  push:
-    branches: [ main ]
+   workflow_run:
+      workflows: [cvmhlabn-ci]
+      types:
+        - completed
 
 jobs:
   cvmhlabn-build-ucvm-mac:
@@ -79,6 +81,8 @@ jobs:
 
 
   cvmhlabn-build-ucvm-linux:
+    if: ${{ success() }}
+    needs: [cvmhlabn-build-ucvm-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
