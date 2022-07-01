@@ -1,0 +1,20 @@
+name: cvmhbn-ci
+
+on:
+   workflow_run:
+      workflows: [cvmhlabn-ucvm-ci cvmhsgbn-ucvm-ci]
+      types:
+        - completed
+
+jobs:
+  cvmhbn-ci-complete:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+    - name: cvmhbn ci testing all done
+      run: echo "ALL DONE!!"
+      shell: bash
