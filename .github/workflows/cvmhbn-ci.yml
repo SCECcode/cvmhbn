@@ -2,7 +2,7 @@ name: cvmhbn-ci
 
 on:
    workflow_run:
-      workflows: [cvmhlabn-ucvm-ci cvmhsgbn-ucvm-ci]
+      workflows: [cvmhlabn-ucvm-ci, cvmhsgbn-ucvm-ci]
       types:
         - completed
 
