@@ -1,0 +1,158 @@
+name: cvmhsmbn-ucvm-ci
+
+on:
+   workflow_run:
+      workflows: [cvmhsmbn-ci]
+      types:
+        - completed
+
+jobs:
+  cvmhsmbn-build-ucvm-mac:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_SRC_PATH 
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhbn/ucvm" >> $GITHUB_ENV
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+### build ucvm(basin) first 
+    - id: get-ucvm 
+      uses: actions/checkout@v2
+      with: 
+        repository: 'SCECcode/UCVM'
+        ref: basin
+        path: ucvm
+    - id: look-around
+      run: ( echo " cvmhsmbn-ucvm-ci:pwd =>";pwd;
+             echo " cvmhsmbn-ucvm-ci:UCVM_SRC_PATH =>"$UCVM_SRC_PATH;
+             echo " cvmhsmbn-ucvm-ci:UCVM_INSTALL_PATH =>"$UCVM_INSTALL_PATH;
+             echo " cvmhsmbn-ucvm-ci:RUNNER_WORKSPACE =>"$RUNNER_WORKSPACE;
+             echo " cvmhsmbn-ucvm-ci:github.action_path =>"${{ github.action_path }};)
+      shell: bash
+    - id: build-ucvm
+      uses: ./ucvm/.github/actions/build-ucvm-action
+      with:
+         initiating-repo: 'cvmhsmbn'
+         target-model: 'cvmhsmbn'
+    - id: get-result
+      run: more ${{ steps.build-ucvm.outputs.build-log }}
+      shell: bash
+    - name: move stock cvmhsmbn away
+      run: (rm -rf $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhsmbn)
+      shell: bash
+### get cvmhbn from github 
+    - name: checkout cvmhbn main
+      uses: actions/checkout@v2
+      with: 
+        ref: main
+        path: cvmhbn
+    - name: move it to the right location
+      run: (mv cvmhbn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      shell: bash
+### build cvmhsmbn from cvmhbn
+    - name: build cvmhsmbn main
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhsmbn)
+      shell: bash
+    - name: build cvmhsmbn as part of ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-build.sh cvmhsmbn)
+      shell: bash
+### check ucvm is still valid
+    - name: check on ucvm
+      run: (source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ucvm_query -H)
+      shell: bash
+    - name: test cvmhsmbn standalone
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn)
+      shell: bash
+    - name: test cvmhsmbn with ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
+      shell: bash
+#    - name: Start SSH via Ngrok
+#      if: ${{ success() }}
+#      uses: luchihoratiu/debug-via-ssh@main
+#      with:
+#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#            NGROK_TIMEOUT: 3000
+#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - name: test cvmhsmbn under ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
+      shell: bash
+
+
+  cvmhsmbn-build-ucvm-linux:
+    if: ${{ success() }}
+    needs: [cvmhsmbn-build-ucvm-mac]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+    steps:
+    - name: set UCVM_SRC_PATH 
+      run: echo "UCVM_SRC_PATH=$RUNNER_WORKSPACE/cvmhbn/ucvm" >> $GITHUB_ENV
+    - name: set UCVM_INSTALL_PATH 
+      run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmhbn/target" >> $GITHUB_ENV
+### build ucvm(basin) first 
+    - id: get-ucvm 
+      uses: actions/checkout@v2
+      with: 
+        repository: 'SCECcode/UCVM'
+        ref: basin
+        path: ucvm
+    - id: build-ucvm
+      uses: ./ucvm/.github/actions/build-ucvm-action
+      with:
+         initiating-repo: 'cvmhsmbn'
+         target-model: 'cvmhsmbn'
+    - name: Start SSH via Ngrok when build-ucvm-action fails
+      if: ${{ failure() }}
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
+            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+            NGROK_TIMEOUT: 6000
+            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - id: get-result
+      run: more ${{ steps.build-ucvm.outputs.build-log }}
+      shell: bash
+    - name: move stock cvmhsmbn away
+      run: (rm -rf $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhsmbn)
+      shell: bash
+### get cvmhbn from github
+    - name: checkout cvmhbn main
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        path: cvmhbn
+    - name: move it to the right location
+      run: (mv cvmhbn $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model)
+      shell: bash
+### build cvmhsmbn from cvmhbn
+    - name: build cvmhsmbn main
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-generate.sh cvmhsmbn) 
+      shell: bash
+    - name: build cvmhsmbn as part of ucvm 
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-build.sh cvmhsmbn)
+      shell: bash
+### check ucvm is still valid
+    - name: check on ucvm
+      run: (source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ucvm_query -H)
+      shell: bash
+    - name: test cvmhsmbn standalone
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn)
+      shell: bash
+    - name: test cvmhsmbn with ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh)
+      shell: bash
+#    - name: Start SSH via Ngrok
+#      if: ${{ success() }}
+#      uses: luchihoratiu/debug-via-ssh@main
+#      with:
+#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#            NGROK_TIMEOUT: 3000
+#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - name: test cvmhsmbn under ucvm
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
+      shell: bash
+
+
+

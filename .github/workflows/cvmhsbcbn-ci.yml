@@ -4,11 +4,6 @@ on:
   push:
     branches: [ main ]
 
-#on:
-#  push:
-#    paths:
-#      - 'trigger-runner'
-
 jobs:
   cvmhsbcbn-build-standalone-mac:
     runs-on: macos-latest
@@ -40,6 +35,8 @@ jobs:
 #            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhsbcbn-build-standalone-linux:
+    if: ${{ success() }}
+    needs: [cvmhsbcbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -57,13 +54,13 @@ jobs:
     - name: build cvmhsbcbn
       run: ./.github/scripts/cvmhbn-build.sh cvmhsbcbn
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#    - name: Start SSH via Ngrok
+#      if: ${{ failure() }}
+#      uses: luchihoratiu/debug-via-ssh@main
+#      with:
+#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#            NGROK_TIMEOUT: 3000
+#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test cvmhsbcbn standalone
       run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhsbcbn
       shell: bash
