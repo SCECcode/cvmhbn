@@ -36,7 +36,7 @@ jobs:
 
   cvmhsmbn-build-standalone-linux:
     if: ${{ success() }}
-    needs: [cvmhsbcbn-build-standalone-mac]
+    needs: [cvmhsmbn-build-standalone-mac]
     runs-on: ubuntu-latest
     strategy:
       matrix:
