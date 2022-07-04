@@ -19,7 +19,7 @@
 
 ## Installation
 This package is intended to be installed as part of the UCVM framework,
-version 22.7.0 or higher. 
+version 22.7 or higher. 
 
 This package can also be build as a standalone program
 
