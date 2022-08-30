@@ -5,6 +5,25 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cvmhbn)
 
+[![cvmhlabn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhlabn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhlabn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhlabn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsgbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsgbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsgbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsgbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhvbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhvbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhvbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhvbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhibbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhibbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhibbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhibbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhrbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhrbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhrbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhrbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhstbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhstbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhstbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhstbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsbbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsbbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsbbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsbbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsbcbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsbcbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsbcbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsbcbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsmbn-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsmbn-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+[![cvmhsmbn-ucvm-ci Actions Status](https://github.com/SCECcode/cvmhbn/workflows/cvmhsmbn-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmhbn/actions)
+
 
 ## Description
 
