@@ -32,10 +32,8 @@ UCVM_CFLAGS = -I$(UCVM_INSTALL_PATH)/include
 UCVM_LDFLAGS = -L$(UCVM_INSTALL_PATH)/lib -lucvm -dynamic  -L$(UCVM_INSTALL_PATH)/lib/euclid3/lib -letree -L$(UCVM_INSTALL_PATH)/lib/proj-5/lib -lproj -lpthread -L$(UCVM_INSTALL_PATH)/lib/fftw/lib -lfftw3 -lm -ldl
 
 CVMH_LDFLAGS = -L$(UCVM_INSTALL_PATH)/model/cvmh/lib -lvxapi -L$(UCVM_INSTALL_PATH)/model/cvmh/lib -lgeo
-CENCAL_LDFLAGS = -L$(UCVM_INSTALL_PATH)/model/cencal/lib -lcencalvm -lstdc++
 
 CVMH_EXISTS := $(shell [[ -e $(UCVM_INSTALL_PATH)/model/cvmh/include/vx_sub.h ]] && echo 1 || echo 0 )
-CENCAL_EXISTS := $(shell [[ -e $(UCVM_INSTALL_PATH)/model/cencal/include/cencalvm/query/cvmerror.h ]] && echo 1 || echo 0 )
 
 %%cvmhbn%_ucvm_validate.o : %%cvmhbn%_ucvm_validate.c
 	$(CC) -c -o $@ $^ $(UCVM_CFLAGS) $(AM_CFLAGS) $(CFLAGS)
