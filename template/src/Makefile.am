@@ -35,7 +35,7 @@ lib%%cvmhbn%.a: vx_sub_%%cvmhbn%.o vx_io.o utils.o %%cvmhbn%_static.o
 lib%%cvmhbn%.so: vx_sub_%%cvmhbn%.o vx_io.o utils.o %%cvmhbn%.o
 	$(CC) -shared $(AM_CFLAGS) -o lib%%cvmhbn%.so $^ $(AM_LDFLAGS)
 
-libvxapi_%%cvmhbn%.a: vx_sub_%%cvmhbn%.o vx_io.o utils.o *.h
+libvxapi_%%cvmhbn%.a: vx_sub_%%cvmhbn%.o vx_io.o utils.o 
 	$(AR) rcs $@ $^
 
 %%cvmhbn%.o: %%cvmhbn%.c

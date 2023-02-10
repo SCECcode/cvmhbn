@@ -92,8 +92,8 @@ int vx_cleanup();
 /* return version string */
 int vx_version(char *ver);
 
-/* return config info */
-int vx_config(char **key, char **val, int len);
+/* setup config info, store in key/val */
+void vx_config(char **key, char **val, int len);
 
 /* Set Z mode to either elevation, depth, or elev offset */
 int vx_setzmode(vx_zmode_t m);
