@@ -5,7 +5,7 @@ utm_zone = 11
 model_dir = %%cvmhbn% 
 model_data_path  = https://g-c662a6.a78b8.36fe.data.globus.org/ucvm/models
 
-inter = 0
+interp = 0
 
 ## origin: ??
 ## upper: ??
