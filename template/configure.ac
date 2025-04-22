@@ -40,11 +40,14 @@ fi
 if test x"$CVM_LARGEDATA_DIR" != x; then
    # test directory existence
    CVMH_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/%%cvmhbn%
-#this does not work if the LARGEDATA_DIR is not mounted/binded/available when ucvm is being built. 
-#ie with docker compose
-#   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/%%cvmhbn%/interfaces.vo, [], [AC_MSG_ERROR(["%%CVMHBN% data not found in cvm_largedata_dir"])])
-   AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
-   AC_SUBST(CVMH_LARGEDATA_DIR)
+   if test x"$CVM_IN_DOCKER" != x; then
+       AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
+       AC_SUBST(CVMH_LARGEDATA_DIR)
+     else
+       AC_CHECK_FILE($CVMH_LARGEDATA_DIR/interfaces.vo,
+                   [AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true) AC_SUBST(CVMH_LARGEDATA_DIR)],
+                   [AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)])
+     fi
 else
    AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)
 fi
