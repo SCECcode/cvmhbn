@@ -4,6 +4,10 @@
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
+The CVM-H basin models describe seismic P- and S-wave velocities, and densities 
+in sedimentary basins, based on sonic logs in wells, stacking velocities in seismic 
+reflection surveys, and calibrated age-depth relationships in some basins. The base
+of models is the top of crystalline or metamorphic rocks below the basins.
 
 ## Description
 

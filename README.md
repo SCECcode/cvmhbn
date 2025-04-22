@@ -29,7 +29,10 @@
 
 CVMH Basin is the templated base code for generate basin model access code for various CVMH basins.
 
-The CVM-H basin models describe seismic P- and S-wave velocities, and densities in sedimentary basins, based on sonic logs in wells, stacking velocities in seismic reflection surveys, and calibrated age-depth relationships in some basins. The base of models is the top of crystalline or metamorphic rocks below the basins.
+The CVM-H basin models describe seismic P- and S-wave velocities, and densities in sedimentary basins,
+based on sonic logs in wells, stacking velocities in seismic reflection surveys, and calibrated 
+age-depth relationships in some basins. The base of models is the top of crystalline or metamorphic
+rocks below the basins.
 
 ## Table of Contents
 1. [Software Documentation](https://github.com/SCECcode/cvmhbn/wiki)
