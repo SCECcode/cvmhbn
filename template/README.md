@@ -1,7 +1,6 @@
 # %%CVMHBN_MODEL% (%%cvmhbn%)
 
 <a href="https://github.com/SCECcode/%%cvmhbn%.git"><img src="https://github.com/SCECcode/cvmhbn/wiki/images/%%cvmhbn%_logo.png"></a>
-
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 The CVM-H basin models describe seismic P- and S-wave velocities, and densities 
@@ -23,7 +22,7 @@ of models is the top of crystalline or metamorphic rocks below the basins.
 
 ## Installation
 This package is intended to be installed as part of the UCVM framework,
-version 22.7 or higher. 
+version 25.7 or higher. 
 
 This package can also be build as a standalone program
 
@@ -49,7 +48,7 @@ A command line program accepts Geographic Coordinates or UTM Zone 11 to extract 
 from %%CVMHBN%.
 
 ## Support
-Support for %%CVMHBN% is provided by the Southern California Earthquake Center
+Support for %%CVMHBN% is provided by the Statewide California Earthquake Center
 (SCEC) Research Computing Group.  Users can report issues and feature requests 
 using %%CVMHBN%'s github-based issue tracking link below. Developers will also 
 respond to emails sent to the SCEC software contact listed below.

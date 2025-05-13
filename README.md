@@ -34,13 +34,6 @@ based on sonic logs in wells, stacking velocities in seismic reflection surveys
 age-depth relationships in some basins. The base of models is the top of crystalline or metamorphic
 rocks below the basins.
 
-## Table of Contents
-1. [Software Documentation](https://github.com/SCECcode/cvmhbn/wiki)
-2. [Installation](#installation)
-4. [Contributing](#contributing)
-5. [Credits](#credit)
-6. [License](#license)
-
 ## Installation
 
 After download the cvmhbn with github, to create each basin model 
@@ -69,23 +62,13 @@ As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use basin labe
 9. cvmhsmbn (Santa Maria)
 
 
+## Contact the authors
 
-## Support
-Support for CVMHBN is provided by the Southern California Earthquake Center
-(SCEC) Research Computing Group.  Users can report issues and feature requests 
-using CVMHBN's github-based issue tracking link below. Developers will also 
-respond to emails sent to the SCEC software contact listed below.
-1. [CVMHBN Github Issue Tracker](https://github.com/SCECcode/cvmhbn/issues)
-2. Email Contact: software@scec.usc.edu
+If you would like to contact the authors regarding this software,
+please e-mail software@scec.org. Note this e-mail address should
+be used for questions regarding the software itself (e.g. how
+do I link the library properly?). Questions regarding the model's
+science (e.g. on what paper is the CVMH basin models based?) should be directed
+to the model's authors, located in the AUTHORS file.
 
-## Contributing
-We welcome contributions to the CVMHBN, please contact us at software@scec.usc.edu.
-
-## Credits
-* Andreas Plesch <andreas_plesch@harvard.edu>
-* John Shaw <shaw@eps.harvard.edu>
-
-## License
-This software is distributed under the BSD 3-Clause open-source license.
-Please see the [LICENSE.txt](LICENSE.txt) file for more information.
 
