@@ -1,6 +1,10 @@
 #!/bin/bash
 
 ## testing cvmhlabn validation with ucvm
+#
+if [ -d ../$1  ]; then
+  cd ../$1
+fi
 
 cd test_validation
 
