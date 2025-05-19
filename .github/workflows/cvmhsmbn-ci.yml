@@ -24,7 +24,7 @@ jobs:
       run: ./.github/scripts/cvmhbn-build.sh cvmhsmbn 
       shell: bash
     - name: Start SSH via Ngrok
-      if: ${{ success() }}
+      if: ${{ failure() }}
       uses: luchihoratiu/debug-via-ssh@main
       with:
             NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
