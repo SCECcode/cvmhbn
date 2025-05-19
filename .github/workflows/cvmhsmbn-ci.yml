@@ -26,13 +26,13 @@ jobs:
     - name: test cvmhsmbn standalone
       run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn
       shell: bash
-#    - name: Start SSH via Ngrok
-#      if: ${{ success() }}
-#      uses: luchihoratiu/debug-via-ssh@main
-#      with:
-#            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-#            NGROK_TIMEOUT: 3000
-#            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+    - name: Start SSH via Ngrok
+      if: ${{ success() }}
+      uses: luchihoratiu/debug-via-ssh@main
+      with:
+            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+            NGROK_TIMEOUT: 3000
+            SSH_PASS: ${{ secrets.NGROK_SECRET }}
 
   cvmhsmbn-build-standalone-linux:
     if: ${{ success() }}
