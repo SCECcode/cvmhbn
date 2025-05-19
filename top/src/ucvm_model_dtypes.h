@@ -1,4 +1,4 @@
-#ifndef UCVM_MODEL_DTYPES_H
+#ifndef UCVM_MODEL_DTYPES_H && UCVM_DTYPES_H
 #define UCVM_MODEL_DTYPES_H
 
 // from ucvm's src/ucvm/ucvm_dtypes.h
