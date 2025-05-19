@@ -33,7 +33,6 @@ jobs:
     - name: test cvmhsmbn standalone
       run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn
       shell: bash
-    - name: Start SSH via Ngrok
 
   cvmhsmbn-build-standalone-linux:
     if: ${{ success() }}
