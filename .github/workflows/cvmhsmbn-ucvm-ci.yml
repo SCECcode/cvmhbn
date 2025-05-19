@@ -141,15 +141,15 @@ jobs:
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn)
       shell: bash
     - name: test cvmhsmbn with ucvm
-      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh svmhsmbn)
+      run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm/work/model/cvmhbn; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/cvmhbn-test-ucvm.sh cvmhsmbn)
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ success() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#   - name: Start SSH via Ngrok
+#     if: ${{ success() }}
+#     uses: luchihoratiu/debug-via-ssh@main
+#     with:
+#           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#           NGROK_TIMEOUT: 3000
+#           SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test cvmhsmbn under ucvm
       run: (cd $RUNNER_WORKSPACE/cvmhbn/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
       shell: bash
