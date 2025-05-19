@@ -10,7 +10,7 @@ if WITH_CVMH_LARGEDATA_DIR
 	echo "USING WITH_CVMH_LARGEDATA_DIR in %%cvmhbn%"
 else
 	if [ ! -d "./%%cvmhbn%" ]; then \
-		./make_data_files.py;
+		./make_data_files.py; \
 	fi
 endif
 
