@@ -2,7 +2,7 @@ name: cvmhvbn-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ foo ]
 
 jobs:
   cvmhvbn-build-standalone-mac:
