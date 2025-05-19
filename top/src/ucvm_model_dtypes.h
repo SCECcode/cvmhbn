@@ -2,6 +2,8 @@
 #define UCVM_MODEL_DTYPES_H
 
 // from ucvm's src/ucvm/ucvm_dtypes.h
+#define UCVM_DTYPES_H
+
 /* Supported error codes  */
 typedef enum { UCVM_CODE_SUCCESS = 0,
                UCVM_CODE_ERROR,
