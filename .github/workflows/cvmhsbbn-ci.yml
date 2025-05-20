@@ -2,7 +2,7 @@ name: cvmhsbbn-ci
 
 on:
   push:
-    branches: [ foo ]
+    branches: [ main ]
 
 jobs:
   cvmhsbbn-build-standalone-mac:
