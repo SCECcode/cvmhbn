@@ -1,8 +1,8 @@
-#ifndef UCVM_MODEL_DTYPES_H && UCVM_DTYPES_H
-#define UCVM_MODEL_DTYPES_H
+#ifndef UCVM_MODEL_DTYPES_H
+#ifndef UCVM_DTYPES_H
 
-// from ucvm's src/ucvm/ucvm_dtypes.h
-#define UCVM_DTYPES_H
+#define UCVM_MODEL_DTYPES_H
+#define UCVM_DTYPES_H // from ucvm's src/ucvm/ucvm_dtypes.h
 
 /* Supported error codes  */
 typedef enum { UCVM_CODE_SUCCESS = 0,
@@ -36,6 +36,7 @@ UCVM_MODEL_PARAM_FORCE_DEPTH_ABOVE_SURF : Force elevation points to be
 */
 typedef enum { UCVM_MODEL_PARAM_FORCE_DEPTH_ABOVE_SURF = 0 } ucvm_mparam_t;
 
+#endif
 #endif
 
 
