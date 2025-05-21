@@ -23,13 +23,13 @@ jobs:
     - name: build cvmhsmbn 
       run: ./.github/scripts/cvmhbn-build.sh cvmhsmbn 
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#   - name: Start SSH via Ngrok
+#     if: ${{ failure() }}
+#     uses: luchihoratiu/debug-via-ssh@main
+#     with:
+#           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#           NGROK_TIMEOUT: 3000
+#           SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test cvmhsmbn standalone
       run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn
       shell: bash
@@ -54,13 +54,13 @@ jobs:
     - name: build cvmhsmbn
       run: ./.github/scripts/cvmhbn-build.sh cvmhsmbn
       shell: bash
-    - name: Start SSH via Ngrok
-      if: ${{ failure() }}
-      uses: luchihoratiu/debug-via-ssh@main
-      with:
-            NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
-            NGROK_TIMEOUT: 3000
-            SSH_PASS: ${{ secrets.NGROK_SECRET }}
+#   - name: Start SSH via Ngrok
+#     if: ${{ failure() }}
+#     uses: luchihoratiu/debug-via-ssh@main
+#     with:
+#           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_TOKEN }}
+#           NGROK_TIMEOUT: 3000
+#           SSH_PASS: ${{ secrets.NGROK_SECRET }}
     - name: test cvmhsmbn standalone
       run: ./.github/scripts/cvmhbn-test-standalone.sh cvmhsmbn
       shell: bash
