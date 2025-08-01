@@ -34,6 +34,8 @@ based on sonic logs in wells, stacking velocities in seismic reflection surveys
 age-depth relationships in some basins. The base of models is the top of crystalline or metamorphic
 rocks below the basins.
 
+Plesch, A., C.H. Thurber, C. Tape, and J.H. Shaw (2021, 08), The SCEC CVM effort: new basin models, enhanced access and tomographic updates. Oral Presentation at 2021 SCEC Annual Meeting
+
 ## Installation
 
 After download the cvmhbn with github, to create each basin model 
