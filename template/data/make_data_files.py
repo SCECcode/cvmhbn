@@ -77,7 +77,7 @@ def main():
 
     subprocess.check_call(["mkdir", "-p", "./"+mdir])
 
-    blist=['base@@', 'CVM_CM_TAG@@', 'CVM_CM.vo', 'CVM_CM_VP@@', 'CVM_CM_VS@@', 'CVMSM_flags@@', 'CVMSM_tag66@@', 'CVMSM_vp66@@', 'CVMSM_vs66@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@' ]
+    blist=['base@@', 'interfaces.vo', 'model_top@@', 'moho@@', 'topo_dem@@' ]
 
     for b in blist :
         ffname = bdir + "/" + b

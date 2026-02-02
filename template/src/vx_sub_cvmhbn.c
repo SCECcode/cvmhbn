@@ -108,9 +108,6 @@ int vx_setup(const char *data_dir, int data_interp)
   char HR_PAR[CMLEN];
   sprintf(HR_PAR, "%s/%%CVMHBN_VO%", data_dir);
   
-  char CM_PAR[CMLEN];
-  sprintf(CM_PAR, "%s/CVM_CM.vo", data_dir);
-
   char TO_PAR[CMLEN];
   sprintf(TO_PAR, "%s/interfaces.vo", data_dir);
 
